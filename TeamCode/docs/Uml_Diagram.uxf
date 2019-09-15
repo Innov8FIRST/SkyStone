@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>10</y>
+      <w>210</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>DriveTrain
+--
+power
+position
+motors
+gyro
+colorSensor
+redSensorReading
+blueSensorReading
+--
+goForward(double inches)
+goBackwards(double inches)
+goToLine(boolean isRed) 
+tankTurn(double degrees)
+pivotTurn(double degrees)
+goLeft(double inches)
+goRight(double inches)
+init()
+stop()
+setPower(double level)
+teleopUpdate(gamepad)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>10</y>
+      <w>210</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>Lift
+--
+position
+power
+limits
+motor
+--
+move(double inches)
+open()
+close()
+init()
+stop()
+teleopUpdate(gamepad)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>10</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Pickup
+--
+motor
+power
+
+--
+pull()
+push()
+init()
+stop()
+teleopUpdate(gamepad)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>10</y>
+      <w>210</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Robot
+--
+driveTrain
+lift
+pickup
+hookServo
+phone
+gamepad
+vuforia
+--
+init()
+stop()
+teleop()
+autonomous()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
