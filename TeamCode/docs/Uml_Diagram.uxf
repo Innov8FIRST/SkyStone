@@ -97,9 +97,29 @@ gamepad
 vuforia
 --
 init()
+initVuforia()
 stop()
 teleop()
 autonomous()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>950</x>
+      <y>10</y>
+      <w>210</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>Vuforia
+--
+phone
+ssReferencePic
+fReferencePic
+--
+getConfi(
+wait(int milliseconds)
 </panel_attributes>
     <additional_attributes/>
   </element>
