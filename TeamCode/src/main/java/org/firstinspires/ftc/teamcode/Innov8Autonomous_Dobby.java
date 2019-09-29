@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@Autonomous(name = "Innov8Teleop_Dobby", group = "Dobby")
+@Autonomous(name = "Innov8Autonomous_Dobby", group = "Dobby")
 public class Innov8Autonomous_Dobby extends LinearOpMode
 {
     @Override

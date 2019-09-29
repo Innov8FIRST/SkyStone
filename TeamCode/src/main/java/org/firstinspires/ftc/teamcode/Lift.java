@@ -28,6 +28,10 @@ public class Lift {
         this.telemetry.addData(LIFT_CAPTION, "Lift is stoppin'");
         this.telemetry.update();
     }
+    public void moveFoundation(){
+        this.telemetry.addData(LIFT_CAPTION, "Lift is moving foundation");
+        this.telemetry.update();
+    }
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
         this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
         this.telemetry.update();
