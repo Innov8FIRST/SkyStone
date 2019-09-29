@@ -12,13 +12,15 @@ public class Pickup {
         telemetry.addData("pickupStatus","Pickup initialized");
         telemetry.update();
     }
-    public void pull() {
-        this.telemetry.addData("pickupStatus","Pickup is pulling");
+    public void pickup() {
+        this.telemetry.addData("pickupStatus","Pickup is picking up block");
         this.telemetry.update();
+        //pickups up block from ground
     }
-    public void push(){
-        this.telemetry.addData("pickupStatus","Pickup is pushing");
+    public void drop(){
+        this.telemetry.addData("pickupStatus","Pickup is releasing block");
         this.telemetry.update();
+        //drops block on foundation
     }
     public void stop(){
         this.telemetry.addData("pickupStatus","Pickup is stopped!!!");

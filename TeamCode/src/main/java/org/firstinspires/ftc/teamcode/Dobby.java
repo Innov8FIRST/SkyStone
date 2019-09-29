@@ -43,10 +43,16 @@ public class Dobby {
         driveTrain.goForward(20.00); // assuming robot is 18" long & camera is on front of robot
         int blockNum = 1;
         while(getConfi()<0.8 && blockNum < 6){
-            driveTrain.goLeft(8.0);
+            driveTrain.goRight(8.0);
             blockNum++;
         }
-
+        pickup.pickup();
+        driveTrain.goBackward(8.0);
+        driveTrain.goLeft(blockNum*8 + 60.0);
+        driveTrain.goForward(8.0);
+        pickup.drop();
+        lift.moveFoundation();
+        driveTrain.goToLine(false);
         this.telemetry.update();
     }
 }
