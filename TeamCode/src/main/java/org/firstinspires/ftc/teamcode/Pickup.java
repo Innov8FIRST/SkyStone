@@ -25,7 +25,7 @@ public class Pickup {
         this.telemetry.update();
     }
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
-        this.telemetry.addData("pickupStatus","Teleop update called");
+        this.telemetry.addData("pickupStatus","Te/leop update called");
         this.telemetry.update();
     }
 
