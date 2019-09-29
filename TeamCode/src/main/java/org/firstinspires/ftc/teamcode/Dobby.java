@@ -10,16 +10,16 @@ public class Dobby {
     DriveTrain driveTrain;
     Pickup pickup;
     Lift lift;
-    HardwareInnov8Dobby robot = new HardwareInnov8Dobby();
+   // HardwareInnov8Dobby robot = new HardwareInnov8Dobby();
     public Dobby(Telemetry telemetry, HardwareMap hwmap){
+        this.telemetry = telemetry;
         this.initVuforia();
-        driveTrain = new DriveTrain(this.telemetry);
         pickup = new Pickup(this.telemetry);
         lift = new Lift(this.telemetry);
-        this.telemetry = telemetry;
+        driveTrain = new DriveTrain(this.telemetry);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
-        robot.init(hwmap);
+        //robot.init(hwmap);
     }
     public void initVuforia(){
         this.telemetry.addData(DOBBY_CAPTION,"Dobby initialized vuforia");
