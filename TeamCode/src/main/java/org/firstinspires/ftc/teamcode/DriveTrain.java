@@ -10,6 +10,7 @@ public class DriveTrain {
 
     double wheelPower = 0.7; // The standard power for the wheels, will probably be changed later
     double inchToTick = 28.65; // The number of encoder ticks per inch for our wheels, currently from google
+    double sideInchToTick = 28.65; // The number of encoder ticks for one inch while travelling sideways, change later
     double startPosition = 0;
     double endPosition = 0;
     double redLine = 0;  // One of the color sensor readings for the red line, definitely change later
@@ -92,7 +93,7 @@ public class DriveTrain {
     public void goLeft(double inches){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION,"Robot is moving left");
         startPosition = robot.motorOne.getCurrentPosition();
-        endPosition = startPosition - (inches * inchToTick); // How far you need to travel
+        endPosition = startPosition - (inches * sideInchToTick); // How far you need to travel
         while (robot.motorOne.getCurrentPosition() > endPosition) {
             robot.motorOne.setPower(-wheelPower);
             robot.motorTwo.setPower(wheelPower);
@@ -105,7 +106,7 @@ public class DriveTrain {
     public void goRight(double inches){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION,"Robot is moving right");
         startPosition = robot.motorFour.getCurrentPosition();
-        endPosition = startPosition - (inches * inchToTick); // How far you need to travel
+        endPosition = startPosition - (inches * sideInchToTick); // How far you need to travel
         while (robot.motorFour.getCurrentPosition() > endPosition) {
             robot.motorOne.setPower(wheelPower); // May need to turn other direct
             robot.motorTwo.setPower(-wheelPower); // May need to turn other direction

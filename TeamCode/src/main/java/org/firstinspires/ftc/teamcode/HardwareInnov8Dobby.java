@@ -23,10 +23,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareInnov8Dobby
 {
     /* Public OpMode members. */
-    public DcMotor  motorOne       = null;
-    public DcMotor  motorTwo       = null;
-    public DcMotor  motorThree     = null;
-    public DcMotor  motorFour      = null;
+    public DcMotor  motorOne       = null; // Front left wheel
+    public DcMotor  motorTwo       = null; // Back left  wheel
+    public DcMotor  motorThree     = null; // Front right wheel
+    public DcMotor  motorFour      = null; // Back right wheel
 
     // Example for servos
 
