@@ -12,12 +12,8 @@ your angle check in the loop, angle should never be null.
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -25,8 +21,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 import java.util.Locale;
 
@@ -47,23 +41,23 @@ import java.util.Locale;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Rev_Gyro_test", group="K9bot")
-public class Rev_Gyro_test extends LinearOpMode {
+@Autonomous(name="SensorGyro_Example", group="K9bot")
+public class SensorGyro_Example extends LinearOpMode {
 
   /* Declare OpMode members. */
-  DcMotor Hex_Motor;
+  // DcMotor Hex_Motor;
 
   BNO055IMU imu;
 
   // State used for updating telemetry
   Orientation angles;
   Acceleration gravity;
-
+  int counter = 0;
 
   @Override
   public void runOpMode() {
 
-    Hex_Motor = hardwareMap.dcMotor.get("Hex_Motor");
+    //Hex_Motor = hardwareMap.dcMotor.get("Hex_Motor");
     double turnspeed = 0.15;
 
     /* Initialize the hardware variables.
@@ -87,17 +81,27 @@ public class Rev_Gyro_test extends LinearOpMode {
 // and named "imu".
     imu = hardwareMap.get(BNO055IMU.class, "imu");
     imu.initialize(parameters);
+    angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+    telemetry.addData("first", angles.firstAngle);
+    telemetry.addData("second", angles.secondAngle);
+    telemetry.addData("third", angles.thirdAngle);
+    telemetry.addData("counter", counter);
+    telemetry.update();
+    waitForStart();
 
 
 // Set up our telemetry dashboard
     while (opModeIsActive()) {
-      if(angles.firstAngle > 45){
-        Hex_Motor.setPower(turnspeed);
-      }
-      else {
-        Hex_Motor.setPower(0);
-      }
+      angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+      telemetry.addData("first", angles.firstAngle);
+      telemetry.addData("second", angles.secondAngle);
+      telemetry.addData("third", angles.thirdAngle);
+      telemetry.addData("counter", counter);
       telemetry.update();
+      if(angles.firstAngle > 45){
+        //Hex_Motor.setPower(turnspeed);
+        counter ++;
+      }
     }
   }
 

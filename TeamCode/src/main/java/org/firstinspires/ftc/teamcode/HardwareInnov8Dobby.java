@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -36,6 +37,8 @@ public class HardwareInnov8Dobby
     public ColorSensor leftSensor  = null;
     public ColorSensor rightSensor = null;
 
+    public BNO055IMU imu;
+
     // Examples for servos
 
     //public static final double MID_SERVO       =  0.5 ;
@@ -67,6 +70,8 @@ public class HardwareInnov8Dobby
         //rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         leftSensor = hwMap.colorSensor.get("leftSensor");
         rightSensor = hwMap.colorSensor.get("rightSensor");
+
+        imu = hwMap.get(BNO055IMU.class, "imu");
 
         // Set all motors to zero power
         motorOne.setPower(0);
