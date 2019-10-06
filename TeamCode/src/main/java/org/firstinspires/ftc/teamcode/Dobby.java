@@ -52,7 +52,7 @@ public class Dobby {
         driveTrain.goForward(8.0);
         pickup.drop();
         lift.moveFoundation();
-        driveTrain.goToLine(false);
+        // driveTrain.goToLine(false);
         this.telemetry.update();
     }
 }
