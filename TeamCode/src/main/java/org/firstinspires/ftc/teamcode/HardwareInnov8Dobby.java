@@ -52,26 +52,26 @@ public class HardwareInnov8Dobby
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public HardwareInnov8Dobby(){
-
+    public HardwareInnov8Dobby(HardwareMap ahwMap){
+        this.init(ahwMap);
     }
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
-        hwMap = ahwMap;
+        this.hwMap = ahwMap;
 
         // Define and Initialize Motors
-        motorOne    = hwMap.dcMotor.get("motorOne");
-        motorTwo    = hwMap.dcMotor.get("motorTwo");
-        motorThree  = hwMap.dcMotor.get("motorThree");
-        motorFour   = hwMap.dcMotor.get("motorFour");
+        motorOne    = this.hwMap.dcMotor.get("motorOne");
+        motorTwo    = this.hwMap.dcMotor.get("motorTwo");
+        motorThree  = this.hwMap.dcMotor.get("motorThree");
+        motorFour   = this.hwMap.dcMotor.get("motorFour");
         //leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        leftSensor = hwMap.colorSensor.get("leftSensor");
-        rightSensor = hwMap.colorSensor.get("rightSensor");
+        leftSensor = this.hwMap.colorSensor.get("leftSensor");
+        rightSensor = this.hwMap.colorSensor.get("rightSensor");
 
-        imu = hwMap.get(BNO055IMU.class, "imu");
+        imu = this.hwMap.get(BNO055IMU.class, "imu");
 
         // Set all motors to zero power
         motorOne.setPower(0);

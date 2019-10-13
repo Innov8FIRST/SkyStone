@@ -13,8 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 public class DriveTrain {
     String DRIVE_TRAIN_CAPTION = "Drive Status";
     Telemetry telemetry;
-    HardwareInnov8Dobby robot = new HardwareInnov8Dobby();   // Use a Innov8's hardware
-
+    HardwareInnov8Dobby robot;
 
 
     double wheelPower = 0.7; // The standard power for the wheels, will probably be changed later
@@ -27,7 +26,7 @@ public class DriveTrain {
     int counter = 0;
     Orientation angles;
     BNO055IMU.Parameters parameters;
-    public DriveTrain(Telemetry telemetry){
+    public DriveTrain(Telemetry telemetry, HardwareInnov8Dobby robot){
 
         parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -40,58 +39,59 @@ public class DriveTrain {
 // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
 // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
 // and named "imu".
-        robot.imu.initialize(parameters);
-        angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        telemetry.addData("first", angles.firstAngle);
-        telemetry.addData("second", angles.secondAngle);
-        telemetry.addData("third", angles.thirdAngle);
-        telemetry.addData("counter", counter);
-        telemetry.update();
+        this.robot = robot;
+        this.robot.imu.initialize(parameters);
+        angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         this.telemetry = telemetry;
+        this.telemetry.addData("first", angles.firstAngle);
+        this.telemetry.addData("second", angles.secondAngle);
+        this.telemetry.addData("third", angles.thirdAngle);
+        this.telemetry.addData("counter", counter);
+        this.telemetry.update();
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Drive train initialized");
         this.telemetry.update();
     }
 
     public void goForward(double inches){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
-        startPosition = robot.motorOne.getCurrentPosition();
+        startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * inchToTick); // How far you need to travel
-        while (robot.motorOne.getCurrentPosition() < endPosition) {
-            robot.motorOne.setPower(wheelPower);
-            robot.motorTwo.setPower(wheelPower);
-            robot.motorThree.setPower(wheelPower);
-            robot.motorFour.setPower(wheelPower);
+        while (this.robot.motorOne.getCurrentPosition() < endPosition) {
+            this.robot.motorOne.setPower(wheelPower);
+            this.robot.motorTwo.setPower(wheelPower);
+            this.robot.motorThree.setPower(wheelPower);
+            this.robot.motorFour.setPower(wheelPower);
         }
         this.telemetry.update();
     }
     public void goBackward(double inches){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving backwards");
-        startPosition = robot.motorOne.getCurrentPosition();
+        startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition - (inches * inchToTick); // How far you need to travel
-        while (robot.motorOne.getCurrentPosition() > endPosition) {
-            robot.motorOne.setPower(-wheelPower);
-            robot.motorTwo.setPower(-wheelPower);
-            robot.motorThree.setPower(-wheelPower);
-            robot.motorFour.setPower(-wheelPower);
+        while (this.robot.motorOne.getCurrentPosition() > endPosition) {
+            this.robot.motorOne.setPower(-wheelPower);
+            this.robot.motorTwo.setPower(-wheelPower);
+            this.robot.motorThree.setPower(-wheelPower);
+            this.robot.motorFour.setPower(-wheelPower);
         }
         this.telemetry.update();
     }
     public void goRightToLine(boolean isRed){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving to line");
         if (isRed == true) { // If we're on red alliance
-            while (robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
-                robot.motorOne.setPower(wheelPower); // May need to turn other direct
-                robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
-                robot.motorThree.setPower(-wheelPower);
-                robot.motorFour.setPower(wheelPower);
+            while (this.robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
+                this.robot.motorOne.setPower(wheelPower); // May need to turn other direct
+                this.robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
+                this.robot.motorThree.setPower(-wheelPower);
+                this.robot.motorFour.setPower(wheelPower);
             }
         }
         if (isRed == false) { // If we're on blue alliance
-            while (robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
-                robot.motorOne.setPower(wheelPower); // May need to turn other direct
-                robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
-                robot.motorThree.setPower(-wheelPower);
-                robot.motorFour.setPower(wheelPower);
+            while (this.robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
+                this.robot.motorOne.setPower(wheelPower); // May need to turn other direct
+                this.robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
+                this.robot.motorThree.setPower(-wheelPower);
+                this.robot.motorFour.setPower(wheelPower);
             }
         }
         this.telemetry.update();
@@ -99,33 +99,38 @@ public class DriveTrain {
     public void goLeftToLine(boolean isRed){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving to line");
         if (isRed == true) { // If we're on red alliance
-            while (robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
-                robot.motorOne.setPower(-wheelPower);
-                robot.motorTwo.setPower(wheelPower);
-                robot.motorThree.setPower(wheelPower);
-                robot.motorFour.setPower(-wheelPower);
+            while (this.robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
+                this.robot.motorOne.setPower(-wheelPower);
+                this.robot.motorTwo.setPower(wheelPower);
+                this.robot.motorThree.setPower(wheelPower);
+                this.robot.motorFour.setPower(-wheelPower);
             }
         }
         if (isRed == false) { // If we're on blue alliance
-            while (robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
-                robot.motorOne.setPower(-wheelPower);
-                robot.motorTwo.setPower(wheelPower);
-                robot.motorThree.setPower(wheelPower);
-                robot.motorFour.setPower(-wheelPower);
+            while (this.robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
+                this.robot.motorOne.setPower(-wheelPower);
+                this.robot.motorTwo.setPower(wheelPower);
+                this.robot.motorThree.setPower(wheelPower);
+                this.robot.motorFour.setPower(-wheelPower);
             }
         }
         this.telemetry.update();
     }
+
+    /**
+     *
+     * @param degreesToTurn Number of degrees to turn. If negative, turns right. If positive, turns left.
+     */
     public void turn(double degreesToTurn){
-        robot.imu.initialize(parameters);
-        angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        this.robot.imu.initialize(parameters);
+        angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         if (degreesToTurn < 0) {
             while (angles.firstAngle > degreesToTurn) {
-                robot.motorOne.setPower(wheelPower);
-                robot.motorTwo.setPower(wheelPower);
-                robot.motorThree.setPower(-wheelPower);
-                robot.motorFour.setPower(-wheelPower);
-                angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+                this.robot.motorOne.setPower(wheelPower);
+                this.robot.motorTwo.setPower(wheelPower);
+                this.robot.motorThree.setPower(-wheelPower);
+                this.robot.motorFour.setPower(-wheelPower);
+                angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 telemetry.addData("angles", angles.firstAngle);
                 telemetry.addData("degreesToTurn", degreesToTurn);
                 telemetry.update();
@@ -133,11 +138,11 @@ public class DriveTrain {
         }
         else {
             while (angles.firstAngle < degreesToTurn) {
-                robot.motorOne.setPower(-wheelPower);
-                robot.motorTwo.setPower(-wheelPower);
-                robot.motorThree.setPower(wheelPower);
-                robot.motorFour.setPower(wheelPower);
-                angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+                this.robot.motorOne.setPower(-wheelPower);
+                this.robot.motorTwo.setPower(-wheelPower);
+                this.robot.motorThree.setPower(wheelPower);
+                this.robot.motorFour.setPower(wheelPower);
+                angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 telemetry.addData("angles", angles.firstAngle);
                 telemetry.addData("degreesToTurn", degreesToTurn);
                 telemetry.update();
@@ -148,26 +153,26 @@ public class DriveTrain {
     }
     public void goLeft(double inches){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION,"Robot is moving left");
-        startPosition = robot.motorOne.getCurrentPosition();
+        startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition - (inches * sideInchToTick); // How far you need to travel
-        while (robot.motorOne.getCurrentPosition() > endPosition) {
-            robot.motorOne.setPower(-wheelPower);
-            robot.motorTwo.setPower(wheelPower);
-            robot.motorThree.setPower(wheelPower); // May need to go other direction
-            robot.motorFour.setPower(-wheelPower); // May need to go other direction
+        while (this.robot.motorOne.getCurrentPosition() > endPosition) {
+            this.robot.motorOne.setPower(-wheelPower);
+            this.robot.motorTwo.setPower(wheelPower);
+            this.robot.motorThree.setPower(wheelPower); // May need to go other direction
+            this.robot.motorFour.setPower(-wheelPower); // May need to go other direction
         }
         this.telemetry.update();
     }
 
     public void goRight(double inches){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION,"Robot is moving right");
-        startPosition = robot.motorFour.getCurrentPosition();
+        startPosition = this.robot.motorFour.getCurrentPosition();
         endPosition = startPosition - (inches * sideInchToTick); // How far you need to travel
-        while (robot.motorFour.getCurrentPosition() > endPosition) {
-            robot.motorOne.setPower(wheelPower); // May need to turn other direct
-            robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
-            robot.motorThree.setPower(-wheelPower);
-            robot.motorFour.setPower(wheelPower);
+        while (this.robot.motorFour.getCurrentPosition() > endPosition) {
+            this.robot.motorOne.setPower(wheelPower); // May need to turn other direct
+            this.robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
+            this.robot.motorThree.setPower(-wheelPower);
+            this.robot.motorFour.setPower(wheelPower);
         }
         this.telemetry.update();
     }

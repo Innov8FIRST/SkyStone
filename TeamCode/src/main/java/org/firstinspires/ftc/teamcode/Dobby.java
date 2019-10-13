@@ -10,13 +10,14 @@ public class Dobby {
     DriveTrain driveTrain;
     Pickup pickup;
     Lift lift;
-   // HardwareInnov8Dobby robot = new HardwareInnov8Dobby();
+   HardwareInnov8Dobby robot;
     public Dobby(Telemetry telemetry, HardwareMap hwmap){
+        this.robot = new HardwareInnov8Dobby(hwmap);
         this.telemetry = telemetry;
         this.initVuforia();
         pickup = new Pickup(this.telemetry);
         lift = new Lift(this.telemetry);
-        driveTrain = new DriveTrain(this.telemetry);
+        driveTrain = new DriveTrain(this.telemetry, this.robot);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
         //robot.init(hwmap);
@@ -40,7 +41,7 @@ public class Dobby {
     }
     public void autonomous() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
-        driveTrain.goForward(20.00); // assuming robot is 18" long & camera is on front of robot
+        //driveTrain.goForward(20.00); // assuming robot is 18" long & camera is on front of robot
         //int blockNum = 1;
         /*while(getConfi()<0.8 && blockNum < 6){
             driveTrain.goRight(8.0);
@@ -53,6 +54,10 @@ public class Dobby {
         //pickup.drop();
         //lift.moveFoundation();
         // driveTrain.goToLine(false);
+        driveTrain.goLeft(8);
+        driveTrain.goRight(8);
+        driveTrain.turn(-90);
+        driveTrain.turn(90);
         this.telemetry.update();
     }
 }
