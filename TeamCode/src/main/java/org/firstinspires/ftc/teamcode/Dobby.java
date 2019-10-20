@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -10,6 +11,8 @@ public class Dobby {
     DriveTrain driveTrain;
     Pickup pickup;
     Lift lift;
+    Gamepad gamepad1 = new Gamepad();
+    Gamepad gamepad2 = new Gamepad();
    HardwareInnov8Dobby robot;
     public Dobby(Telemetry telemetry, HardwareMap hwmap){
         this.robot = new HardwareInnov8Dobby(hwmap);
@@ -38,7 +41,7 @@ public class Dobby {
     }
     public void teleop(){
         this.telemetry.addData(DOBBY_CAPTION,"Dobby is teleop-ing");
-        //driveTrain.teleopUpdate();
+        driveTrain.teleopUpdate(gamepad1,gamepad2);
         this.telemetry.update();
     }
     public void autonomous() {
