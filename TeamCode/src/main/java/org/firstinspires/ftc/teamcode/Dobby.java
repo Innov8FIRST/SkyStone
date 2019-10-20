@@ -39,7 +39,7 @@ public class Dobby {
 
         this.telemetry.update();
     }
-    public void teleop(){
+    public void teleop(Gamepad gamepad1, Gamepad gamepad2){
         this.telemetry.addData(DOBBY_CAPTION,"Dobby is teleop-ing");
         driveTrain.teleopUpdate(gamepad1,gamepad2);
         this.telemetry.update();
