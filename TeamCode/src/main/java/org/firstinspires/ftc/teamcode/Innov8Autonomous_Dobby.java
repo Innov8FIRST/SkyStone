@@ -10,7 +10,10 @@ public class Innov8Autonomous_Dobby extends LinearOpMode
     public void runOpMode() throws InterruptedException {
         Dobby dobby = new Dobby(telemetry, hardwareMap);
         waitForStart();
-        dobby.autonomous();
-    }
+        while (opModeIsActive()) {
+            dobby.autonomous();
+            dobby.driveTrain.stop();
+        }
 
+    }
 }

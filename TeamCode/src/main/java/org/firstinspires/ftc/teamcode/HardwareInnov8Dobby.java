@@ -68,8 +68,8 @@ public class HardwareInnov8Dobby
         motorFour   = this.hwMap.dcMotor.get("motorFour");
         //leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        leftSensor = this.hwMap.colorSensor.get("leftSensor");
-        rightSensor = this.hwMap.colorSensor.get("rightSensor");
+        //leftSensor = this.hwMap.colorSensor.get("leftSensor");
+        //rightSensor = this.hwMap.colorSensor.get("rightSensor");
 
         imu = this.hwMap.get(BNO055IMU.class, "imu");
 
