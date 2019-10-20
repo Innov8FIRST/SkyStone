@@ -187,6 +187,29 @@ public class DriveTrain {
     }
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "gamepad updated");
+        while (Math.abs(gamepad1.left_stick_y) > 0.2) {
+            wheelPower = gamepad1.left_stick_y;
+            this.robot.motorOne.setPower(wheelPower);
+            this.robot.motorTwo.setPower(wheelPower);
+            this.robot.motorThree.setPower(wheelPower);
+            this.robot.motorFour.setPower(wheelPower);
+        }
+        while (Math.abs(gamepad1.left_stick_x) > 0.5) {
+            if (gamepad1.left_stick_x > 0) {
+                wheelPower = gamepad1.left_stick_x;
+                this.robot.motorOne.setPower(wheelPower); // May need to turn other direct
+                this.robot.motorTwo.setPower(-wheelPower); // May need to turn other direction
+                this.robot.motorThree.setPower(-wheelPower);
+                this.robot.motorFour.setPower(wheelPower);
+            }
+            else {
+                wheelPower = Math.abs(gamepad1.left_stick_x);
+                this.robot.motorOne.setPower(-wheelPower); // May need to turn other direct
+                this.robot.motorTwo.setPower(wheelPower); // May need to turn other direction
+                this.robot.motorThree.setPower(wheelPower);
+                this.robot.motorFour.setPower(-wheelPower);
+            }
+        }
         this.telemetry.update();
     }
 }

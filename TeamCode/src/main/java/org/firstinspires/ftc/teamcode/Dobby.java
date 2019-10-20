@@ -33,10 +33,12 @@ public class Dobby {
     }
     public void stop(){
         this.telemetry.addData(DOBBY_CAPTION,"Dobby is free");
+
         this.telemetry.update();
     }
     public void teleop(){
         this.telemetry.addData(DOBBY_CAPTION,"Dobby is teleop-ing");
+        //driveTrain.teleopUpdate();
         this.telemetry.update();
     }
     public void autonomous() {
