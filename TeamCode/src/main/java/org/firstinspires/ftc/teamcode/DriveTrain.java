@@ -17,7 +17,7 @@ public class DriveTrain {
 
 
     double wheelPower = 0.7; // The standard power for the wheels, will probably be changed later
-    double inchToTick = 28.65; // The number of encoder ticks per inch for our wheels, currently from google
+    double inchToTick = 1; // The number of encoder ticks per inch for our wheels, currently from google
     double sideInchToTick = 28.65; // The number of encoder ticks for one inch while travelling sideways, change later
     double startPosition = 0;
     double endPosition = 0;
@@ -51,12 +51,26 @@ public class DriveTrain {
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Drive train initialized");
         this.telemetry.update();
     }
-
-    public void goForward(double inches){
-        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
+    public double setPosition(double inches, double startPosition, double endPosition){
+        this.telemetry.addData("SetPos", "Dobby is setting positions");
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * inchToTick); // How far you need to travel
+        this.telemetry.addData("StartPosition", startPosition);
+        this.telemetry.addData("EndPosition", endPosition);
+        this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
+        this.telemetry.update();
+        return (startPosition);
+
+
+    }
+
+    public void goForward(){
+        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
         while (this.robot.motorOne.getCurrentPosition() < endPosition) {
+            this.telemetry.addData("StartPosition", startPosition);
+            this.telemetry.addData("EndPosition", endPosition);
+            this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
+            this.telemetry.update();
             this.robot.motorOne.setPower(wheelPower);
             this.robot.motorTwo.setPower(wheelPower);
             this.robot.motorThree.setPower(wheelPower);
