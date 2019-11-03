@@ -66,8 +66,10 @@ public class HardwareInnov8Dobby
         motorTwo    = this.hwMap.dcMotor.get("motorTwo");
         motorThree  = this.hwMap.dcMotor.get("motorThree");
         motorFour   = this.hwMap.dcMotor.get("motorFour");
-        //leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        //rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        motorTwo.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        motorFour.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         //leftSensor = this.hwMap.colorSensor.get("leftSensor");
         //rightSensor = this.hwMap.colorSensor.get("rightSensor");
 

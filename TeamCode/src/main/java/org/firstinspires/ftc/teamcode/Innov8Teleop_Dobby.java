@@ -11,6 +11,6 @@ public class Innov8Teleop_Dobby extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Dobby dobby = new Dobby(telemetry, hardwareMap, this);
         waitForStart();
-    //    dobby.teleop(gamepad1, gamepad2);
+        dobby.teleop(gamepad1, gamepad2);
     }
 }

@@ -43,9 +43,11 @@ public class Dobby {
         this.telemetry.update();
     }
     public void teleop(Gamepad gamepad1, Gamepad gamepad2){
-        this.telemetry.addData(DOBBY_CAPTION,"Dobby is teleop-ing");
-        driveTrain.teleopUpdate(gamepad1,gamepad2);
-        this.telemetry.update();
+        while (this.opMode.opModeIsActive()) {
+            this.telemetry.addData(DOBBY_CAPTION, "Dobby is teleop-ing");
+            driveTrain.teleopUpdate(gamepad1, gamepad2);
+            this.telemetry.update();
+        }
     }
     public void autonomous() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
@@ -58,12 +60,12 @@ public class Dobby {
         //pickup.pickup();
         //driveTrain.goBackward(8.0);
         //driveTrain.goLeft(blockNum*8 + 60.0);
-        driveTrain.goForward(12.0);
+        driveTrain.goForward(36.0);
         //pickup.drop();
         //lift.moveFoundation();
         // driveTrain.goToLine(false);
-        //driveTrain.goLeft(8);
-        //driveTrain.goRight(8);
+        driveTrain.goLeft(20);
+        driveTrain.goRight(20);
         //driveTrain.turn(-90);
         //driveTrain.turn(90);
         this.telemetry.update();
