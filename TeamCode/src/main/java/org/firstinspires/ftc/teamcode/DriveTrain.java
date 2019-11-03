@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.util.Log;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -56,6 +58,7 @@ public class DriveTrain {
     }
 
     public void goForward(double inches){
+        Log.d("Test", "This is a test");
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * inchToTick); // How far you need to travel
