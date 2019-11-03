@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -14,6 +15,7 @@ public class DriveTrain {
     String DRIVE_TRAIN_CAPTION = "Drive Status";
     Telemetry telemetry;
     HardwareInnov8Dobby robot;
+    LinearOpMode opMode;
 
 
     double wheelPower = 0.7; // The standard power for the wheels, will probably be changed later
@@ -26,7 +28,7 @@ public class DriveTrain {
     int counter = 0;
     Orientation angles;
     BNO055IMU.Parameters parameters;
-    public DriveTrain(Telemetry telemetry, HardwareInnov8Dobby robot){
+    public DriveTrain(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
 
         parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -39,6 +41,7 @@ public class DriveTrain {
 // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
 // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
 // and named "imu".
+        this.opMode = opMode;
         this.robot = robot;
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -51,22 +54,12 @@ public class DriveTrain {
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Drive train initialized");
         this.telemetry.update();
     }
-    public double setPosition(double inches, double startPosition, double endPosition){
-        this.telemetry.addData("SetPos", "Dobby is setting positions");
+
+    public void goForward(double inches){
+        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * inchToTick); // How far you need to travel
-        this.telemetry.addData("StartPosition", startPosition);
-        this.telemetry.addData("EndPosition", endPosition);
-        this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
-        this.telemetry.update();
-        return (startPosition);
-
-
-    }
-
-    public void goForward(){
-        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
-        while (this.robot.motorOne.getCurrentPosition() < endPosition) {
+        while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
             this.telemetry.addData("StartPosition", startPosition);
             this.telemetry.addData("EndPosition", endPosition);
             this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());

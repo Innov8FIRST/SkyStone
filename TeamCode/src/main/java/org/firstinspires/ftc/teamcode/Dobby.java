@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -11,16 +12,18 @@ public class Dobby {
     DriveTrain driveTrain;
     Pickup pickup;
     Lift lift;
+    LinearOpMode opMode;
     Gamepad gamepad1 = new Gamepad();
     Gamepad gamepad2 = new Gamepad();
    HardwareInnov8Dobby robot;
-    public Dobby(Telemetry telemetry, HardwareMap hwmap){
+    public Dobby(Telemetry telemetry, HardwareMap hwmap, LinearOpMode opMode){
+        this.opMode = opMode;
         this.robot = new HardwareInnov8Dobby(hwmap);
         this.telemetry = telemetry;
         this.initVuforia();
         pickup = new Pickup(this.telemetry);
         lift = new Lift(this.telemetry);
-        driveTrain = new DriveTrain(this.telemetry, this.robot);
+        driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
         //robot.init(hwmap);
@@ -53,16 +56,16 @@ public class Dobby {
             blockNum++;
         }*/
         //pickup.pickup();
-        driveTrain.goBackward(8.0);
+        //driveTrain.goBackward(8.0);
         //driveTrain.goLeft(blockNum*8 + 60.0);
-        driveTrain.goForward(8.0);
+        driveTrain.goForward(12.0);
         //pickup.drop();
         //lift.moveFoundation();
         // driveTrain.goToLine(false);
-        driveTrain.goLeft(8);
-        driveTrain.goRight(8);
-        driveTrain.turn(-90);
-        driveTrain.turn(90);
+        //driveTrain.goLeft(8);
+        //driveTrain.goRight(8);
+        //driveTrain.turn(-90);
+        //driveTrain.turn(90);
         this.telemetry.update();
     }
 }
