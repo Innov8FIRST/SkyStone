@@ -51,21 +51,24 @@ public class Dobby {
     }
     public void autonomous() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
-        //driveTrain.goForward(20.00); // assuming robot is 18" long & camera is on front of robot
-        //int blockNum = 1;
-        /*while(getConfi()<0.8 && blockNum < 6){
-            driveTrain.goRight(8.0);
-            blockNum++;
-        }*/
+        driveTrain.goBackward(12.00); // assuming robot is 18" long & camera is on front of robot
+        int blockNum;
+        for(/*getConfi()<0.8 &&*/ blockNum = 0; blockNum <6; blockNum++){
+            this.telemetry.addData("Block Number is", blockNum);
+            driveTrain.goLeft(8.0);
+            opMode.sleep(2000);
+            this.telemetry.update();
+        }
+        driveTrain.turn(180);
         //pickup.pickup();
-        //driveTrain.goBackward(8.0);
-        //driveTrain.goLeft(blockNum*8 + 60.0);
+        driveTrain.goForward(8.0);
+        driveTrain.goLeft(blockNum*8 + 60.0);
         driveTrain.goForward(36.0);
         //pickup.drop();
         //lift.moveFoundation();
-        // driveTrain.goToLine(false);
-        driveTrain.goLeft(20);
-        driveTrain.goRight(20);
+        //driveTrain.goToLine(false);
+        //driveTrain.goLeft(20);
+        //driveTrain.goRight(20);
         //driveTrain.turn(-90);
         //driveTrain.turn(90);
         this.telemetry.update();
