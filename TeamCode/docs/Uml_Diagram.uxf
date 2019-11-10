@@ -142,7 +142,7 @@ phone
 ssReferencePic
 fReferencePic
 --
-getConfi(
+isThisASkystone()
 wait(int milliseconds)
 </panel_attributes>
     <additional_attributes/>

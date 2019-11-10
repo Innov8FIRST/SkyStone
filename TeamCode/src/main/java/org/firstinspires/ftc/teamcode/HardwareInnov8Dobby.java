@@ -53,13 +53,14 @@ public class HardwareInnov8Dobby
 
     /* Constructor */
     public HardwareInnov8Dobby(HardwareMap ahwMap){
-        this.init(ahwMap);
+        this.hwMap = ahwMap;
+        //this.init(ahwMap);
     }
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
-        this.hwMap = ahwMap;
+
 
         // Define and Initialize Motors
         motorOne    = this.hwMap.dcMotor.get("motorOne");
