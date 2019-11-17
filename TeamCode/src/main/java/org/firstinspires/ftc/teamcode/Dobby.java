@@ -24,11 +24,10 @@ public class Dobby {
         vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
         //pickup = new Pickup(this.telemetry);
         //lift = new Lift(this.telemetry);
-        //driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
+        driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
-        //robot.init(hwmap);
-    }
+}
 
     public double getConfi(){
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is getting confi");
@@ -49,32 +48,33 @@ public class Dobby {
     }
     public void autonomous() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
-//        driveTrain.goBackward(12.00); // assuming robot is 18" long & camera is on front of robot
-//        int blockNum;
+        //driveTrain.goBackward(12.00); // assuming robot is 18" long & camera is on front of robot
+        int blockNum;
 //        for(/*getConfi()<0.8 &&*/ blockNum = 0; blockNum <6; blockNum++){
-//            this.telemetry.addData("Block Number is", blockNum);
-//            driveTrain.goLeft(8.0);
-//            opMode.sleep(2000);
-//            this.telemetry.update();
-//        }
+////            this.telemetry.addData("Block Number is", blockNum);
+////            driveTrain.goLeft(8.0);
+////            opMode.sleep(2000);
+////            this.telemetry.update();
+////        }
 //        driveTrain.turn(180);
 //        //pickup.pickup();
-//        driveTrain.goForward(8.0);
+          //driveTrain.goForward(60.0);
 //        driveTrain.goLeft(blockNum*8 + 60.0);
-//        driveTrain.goForward(36.0);
+        driveTrain.goForward(36.0);
+        driveTrain.goBackward(36.0);
 //        //pickup.drop();
 //        //lift.moveFoundation();
 //        //driveTrain.goToLine(false);
-//        //driveTrain.goLeft(20);
-//        //driveTrain.goRight(20);
-//        //driveTrain.turn(-90);
-//        //driveTrain.turn(90);
-//        this.telemetry.update();
-        while(!vuforia.isSkystone() && this.opMode.opModeIsActive()){
-            this.telemetry.addData("Is Skystone? ", "no");
-            this.telemetry.update();
-        }
-        this.telemetry.addData("Is Skystone? ", "yes");
+        driveTrain.goLeft(36);
+        driveTrain.goRight(36);
+        driveTrain.turn(-90);
+        driveTrain.turn(90);
+        this.telemetry.update();
+//        while(!vuforia.isSkystone() && this.opMode.opModeIsActive()){
+//            this.telemetry.addData("Is Skystone? ", "no");
+//            this.telemetry.update();
+//        }
+//        this.telemetry.addData("Is Skystone? ", "yes");
 
         this.telemetry.update();
     }

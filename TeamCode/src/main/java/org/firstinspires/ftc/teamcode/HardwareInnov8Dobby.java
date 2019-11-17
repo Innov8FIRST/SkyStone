@@ -54,7 +54,7 @@ public class HardwareInnov8Dobby
     /* Constructor */
     public HardwareInnov8Dobby(HardwareMap ahwMap){
         this.hwMap = ahwMap;
-        //this.init(ahwMap);
+        this.init(ahwMap);
     }
 
     /* Initialize standard Hardware interfaces */
