@@ -28,10 +28,15 @@ public class HardwareInnov8Dobby
     public DcMotor  motorTwo       = null; // Back left  wheel
     public DcMotor  motorThree     = null; // Front right wheel
     public DcMotor  motorFour      = null; // Back right wheel
+    public DcMotor liftMotor       = null; // Lift
 
     // Example for servos
 
-    //public Servo    jewelArm     = null;
+    public Servo    handServo      = null;
+    public Servo    baseServoLeft  = null;
+    public Servo    baseServoRight = null;
+    public Servo    rapServoLeft   = null;
+    public Servo    rapServoRight  = null;
 
 
     public ColorSensor leftSensor  = null;
@@ -41,11 +46,11 @@ public class HardwareInnov8Dobby
 
     // Examples for servos
 
-    //public static final double MID_SERVO       =  0.5 ;
+    public static final double MID_SERVO       =  0.5 ;
     //public static final double ARM_UP_POWER    =  0.45 ;
     //public static final double ARM_DOWN_POWER  = -0.45 ;
-    //public static final double START_SERVO     = 0 ; // all the way down
-    //public static final double END_SERVO       = 1 ; // all the way up
+    public static final double START_SERVO     = 0 ; // all the way down
+    public static final double END_SERVO       = 1 ; // all the way up
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -67,10 +72,12 @@ public class HardwareInnov8Dobby
         motorTwo    = this.hwMap.dcMotor.get("motorTwo");
         motorThree  = this.hwMap.dcMotor.get("motorThree");
         motorFour   = this.hwMap.dcMotor.get("motorFour");
+        liftMotor   = this.hwMap.dcMotor.get("liftMotor");
         motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorTwo.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorFour.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        liftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //leftSensor = this.hwMap.colorSensor.get("leftSensor");
         //rightSensor = this.hwMap.colorSensor.get("rightSensor");
 
@@ -81,6 +88,7 @@ public class HardwareInnov8Dobby
         motorTwo.setPower(0);
         motorThree.setPower(0);
         motorFour.setPower(0);
+        liftMotor.setPower(0);
 
         // Set all motors to run without encoders.
 
@@ -89,12 +97,21 @@ public class HardwareInnov8Dobby
         motorTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorThree.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorFour.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
 
         // Example
-        // Example jewelArm = hwMap.servo.get("jewelArm");
-        // Example jewelArm.setPosition(START_SERVO);
+        handServo = hwMap.servo.get("handServo");
+        handServo.setPosition(START_SERVO);
+        baseServoLeft = hwMap.servo.get("baseServoLeft");
+        baseServoLeft.setPosition(START_SERVO);
+        baseServoRight = hwMap.servo.get("baseServoRight");
+        baseServoRight.setPosition(START_SERVO);
+        rapServoLeft = hwMap.servo.get("rapServoLeft");
+        rapServoLeft.setPosition(START_SERVO);
+        rapServoRight = hwMap.servo.get("rapServoRight");
+        rapServoRight.setPosition(START_SERVO);
 
     }
 
