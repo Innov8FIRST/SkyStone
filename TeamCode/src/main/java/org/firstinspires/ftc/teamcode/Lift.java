@@ -28,6 +28,13 @@ public class Lift {
         this.telemetry.update();
         this.robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
+
+    public void encoderReset() {
+        this.robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.telemetry.addData("Encoder reset", "");
+        this.telemetry.update();
+    }
+
     public void moveUp(double inches){
         startLift = this.robot.liftMotor.getCurrentPosition();
         endLift = startLift + (inches * inchesToTickLift);
@@ -60,24 +67,25 @@ public class Lift {
         this.telemetry.update();
     }
 
-    public void open(){
-        this.telemetry.addData(LIFT_CAPTION,"Hand is opening");
-        this.telemetry.update();
-    }
-    public void close(){
-        this.telemetry.addData(LIFT_CAPTION,"Hand is closing");
-        this.telemetry.update();
-    }
     public void stop(){
         this.telemetry.addData(LIFT_CAPTION, "Lift is stoppin'");
         this.telemetry.update();
     }
-    public void moveFoundation(){
-        this.telemetry.addData(LIFT_CAPTION, "Lift is moving foundation");
-        this.telemetry.update();
-    }
+
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
+
+        this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
+        telemetry.addData("2_left_stick_y", gamepad1.left_stick_y);
         this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
         this.telemetry.update();
+
+        if (Math.abs(gamepad2.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {
+            this.robot.liftMotor.setPower(gamepad2.left_stick_y);
+
+        }
+        if (Math.abs(gamepad2.left_stick_y) <= 0.2) {
+            this.robot.liftMotor.setPower(0);
+        }
+
     }
 }
