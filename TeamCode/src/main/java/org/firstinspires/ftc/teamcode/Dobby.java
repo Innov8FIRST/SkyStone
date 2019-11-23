@@ -48,33 +48,22 @@ public class Dobby {
     }
     public void autonomous() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
-        //driveTrain.goBackward(12.00); // assuming robot is 18" long & camera is on front of robot
-        int blockNum;
-//        for(/*getConfi()<0.8 &&*/ blockNum = 0; blockNum <6; blockNum++){
-////            this.telemetry.addData("Block Number is", blockNum);
-////            driveTrain.goLeft(8.0);
-////            opMode.sleep(2000);
-////            this.telemetry.update();
-////        }
-//        driveTrain.turn(180);
-//        //pickup.pickup();
-          //driveTrain.goForward(60.0);
-//        driveTrain.goLeft(blockNum*8 + 60.0);
-        driveTrain.goForward(36.0);
-        driveTrain.goBackward(36.0);
-//        //pickup.drop();
-//        //lift.moveFoundation();
-//        //driveTrain.goToLine(false);
-        driveTrain.goLeft(36);
-        driveTrain.goRight(36);
-        driveTrain.turn(-90);
+        driveTrain.goForward(12.00); // assuming robot is 18" long & camera is on front of robot
+        int blockNum = 1;
+        opMode.sleep(2000);
+        while(blockNum<=6 && !vuforia.isSkystone() && this.opMode.opModeIsActive()){
+            this.telemetry.addData("Block Number is", blockNum);
+            this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
+            opMode.sleep(2000);
+            driveTrain.goRight(8.0);
+            this.telemetry.update();
+        }
         driveTrain.turn(90);
-        this.telemetry.update();
-//        while(!vuforia.isSkystone() && this.opMode.opModeIsActive()){
-//            this.telemetry.addData("Is Skystone? ", "no");
-//            this.telemetry.update();
-//        }
-//        this.telemetry.addData("Is Skystone? ", "yes");
+        //pickup.pickup();
+        driveTrain.goForward(blockNum*8 + 60.0); // should end up in "building zone"
+        //pickup.drop();
+        //lift.moveFoundation();
+        //driveTrain.goToLine(false);
 
         this.telemetry.update();
     }
