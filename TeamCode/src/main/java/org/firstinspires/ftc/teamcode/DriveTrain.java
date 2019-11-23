@@ -49,14 +49,13 @@ public class DriveTrain {
 // and named "imu".
         this.opMode = opMode;
         this.robot = robot;
+        this.telemetry = telemetry;
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        this.telemetry = telemetry;
         this.telemetry.addData("first", angles.firstAngle);
         this.telemetry.addData("second", angles.secondAngle);
         this.telemetry.addData("third", angles.thirdAngle);
         this.telemetry.addData("counter", counter);
-        this.telemetry.update();
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Drive train initialized");
         this.telemetry.update();
     }

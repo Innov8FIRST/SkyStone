@@ -23,7 +23,7 @@ public class Dobby {
         this.telemetry = telemetry;
         vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
         //pickup = new Pickup(this.telemetry);
-        //lift = new Lift(this.telemetry);
+        lift = new Lift(this.telemetry, this.robot, this.opMode);
         driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
