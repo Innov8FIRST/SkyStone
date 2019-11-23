@@ -110,9 +110,6 @@ public class DobbyVuforia {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
                 List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
-                if (updatedRecognitions != null) {
-                    this.telemetry.addData("# Object Detected", updatedRecognitions.size());
-
                     // step through the list of recognitions and display boundary info.
                     int i = 0;
                     for (Recognition recognition : updatedRecognitions) {
@@ -121,7 +118,10 @@ public class DobbyVuforia {
                                 recognition.getLeft(), recognition.getTop());
                         this.telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                 recognition.getRight(), recognition.getBottom());
-                        if(recognition.getLabel().equals(LABEL_SECOND_ELEMENT)){
+                        if (updatedRecognitions != null) {
+                            this.telemetry.addData("# Object Detected", updatedRecognitions.size());
+
+                            if(recognition.getLabel().equals(LABEL_SECOND_ELEMENT)){
                             return true;
                         }
 
