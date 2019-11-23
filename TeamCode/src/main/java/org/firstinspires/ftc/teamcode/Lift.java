@@ -46,7 +46,7 @@ public class Lift {
             this.telemetry.addData("endLift = ", endLift);
             this.telemetry.update();
         }
-        this.robot.liftMotor.setPower(0);
+        this.stop();
         this.telemetry.addData(LIFT_CAPTION,"Lift is moving");
         this.telemetry.update();
     }
@@ -62,21 +62,22 @@ public class Lift {
             this.telemetry.addData("endLift = ", endLift);
             this.telemetry.update();
         }
-        this.robot.liftMotor.setPower(0);
+        this.stop();
         this.telemetry.addData(LIFT_CAPTION,"Lift is moving");
         this.telemetry.update();
     }
 
-    public void stop(){
-        this.telemetry.addData(LIFT_CAPTION, "Lift is stoppin'");
+    public void stop() {
+        this.telemetry.addData(LIFT_CAPTION, "Lift is stopped");
+        this.robot.liftMotor.setPower(0);
         this.telemetry.update();
     }
+
 
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
 
         this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
         telemetry.addData("2_left_stick_y", gamepad1.left_stick_y);
-        this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
         this.telemetry.update();
 
         if (Math.abs(gamepad2.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {
