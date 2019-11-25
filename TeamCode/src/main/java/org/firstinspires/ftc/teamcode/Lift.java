@@ -12,7 +12,7 @@ public class Lift {
     HardwareInnov8Dobby robot;
     LinearOpMode opMode;
 
-    double inchesToTickLift = 1;
+    double inchesToTickLift = 120;
     double liftPower = .3;
     double startLift = 0;
     double endLift = 0;

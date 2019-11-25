@@ -12,6 +12,7 @@ public class Dobby {
     DriveTrain driveTrain;
     Pickup pickup;
     Lift lift;
+    BaseMover baseMover;
     LinearOpMode opMode;
     DobbyVuforia vuforia;
     Gamepad gamepad1 = new Gamepad();
@@ -25,6 +26,7 @@ public class Dobby {
         pickup = new Pickup(this.telemetry, this.robot, this.opMode);
         lift = new Lift(this.telemetry, this.robot, this.opMode);
         driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
+        baseMover = new BaseMover(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
 }
@@ -45,6 +47,7 @@ public class Dobby {
             driveTrain.teleopUpdate(gamepad1, gamepad2);
             pickup.teleopUpdate(gamepad1, gamepad2);
             lift.teleopUpdate(gamepad1, gamepad2);
+            baseMover.teleopUpdate(gamepad1, gamepad2);
             this.telemetry.update();
         }
     }
@@ -58,13 +61,16 @@ public class Dobby {
             driveTrain.goRight(8.0);
             this.telemetry.update();
         }
+        pickup.rapOut(100);
+        pickup.handClose();
+        lift.moveUp(3);
         driveTrain.turn(90);
-        //pickup.pickup();
         driveTrain.goForward(blockNum*8 + 60.0); // should end up in "building zone"
-        //pickup.drop();
-        //lift.moveFoundation();
-        //driveTrain.goToLine(false);
-
+        pickup.handOpen();
         this.telemetry.update();
+    }
+
+    public void autoPark() {
+        driveTrain.goForward(12.00); // assuming robot is 18" long & camera is on front of robot
     }
 }

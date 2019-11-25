@@ -56,13 +56,16 @@ public class Pickup {
         this.telemetry.update();
         //moves rack and pinion in
     }
-    public void hand(){
-
+    public void handClose(){
+        this.robot.handServo.setPosition(.1);
+    }
+    public void handOpen(){
+        this.robot.handServo.setPosition(.6);
     }
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
         this.telemetry.addData("pickupStatus", "Teleop update called");
         this.telemetry.update();
-        this.robot.rapServoLeft.setPower(gamepad2.right_stick_x);
+        //this.robot.rapServoLeft.setPower(gamepad2.right_stick_x);
         this.robot.rapServoRight.setPower(-gamepad2.right_stick_x);
 
         if (gamepad2.right_bumper) {
