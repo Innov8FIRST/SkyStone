@@ -56,23 +56,29 @@ public class Pickup {
         this.telemetry.update();
         //moves rack and pinion in
     }
-    public void handClose(){
+
+    /*public void handClose(){
         this.robot.handServo.setPosition(.1);
     }
     public void handOpen(){
         this.robot.handServo.setPosition(.6);
-    }
+    }*/
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
         this.telemetry.addData("pickupStatus", "Teleop update called");
         this.telemetry.update();
-        //this.robot.rapServoLeft.setPower(gamepad2.right_stick_x);
+        this.robot.rapServoLeft.setPower(gamepad2.right_stick_x);
         this.robot.rapServoRight.setPower(-gamepad2.right_stick_x);
 
         if (gamepad2.right_bumper) {
-            this.robot.handServo.setPosition(this.robot.handServo.getPosition() + 0.005);
+            //this.robot.handServo.setPosition(this.robot.handServo.getPosition() + 0.005);
+            this.robot.handMotor.setPower(.5);
         }
         else if(gamepad2.left_bumper){
-            this.robot.handServo.setPosition(this.robot.handServo.getPosition() - 0.005);
+            //this.robot.handServo.setPosition(this.robot.handServo.getPosition() - 0.005);
+            this.robot.handMotor.setPower(-.5);
+        }
+        else {
+            this.robot.handMotor.setPower(0);
         }
     }
 

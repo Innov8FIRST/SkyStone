@@ -140,6 +140,8 @@ public class DriveTrain {
      * @param degreesToTurn Number of degrees to turn. If negative, turns right. If positive, turns left.
      */
     public void turn(double degreesToTurn) {
+        double turnCorrector = 0.725;
+        degreesToTurn = degreesToTurn * turnCorrector;
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         if (degreesToTurn < 0) {
@@ -248,8 +250,8 @@ public class DriveTrain {
                 this.robot.motorThree.setPower(wheelPower * wheelThreePower);
                 this.robot.motorFour.setPower(-wheelPower * wheelThreePower);
             }
-        }
-        if (Math.abs(gamepad1.right_stick_x) > 0.2 && this.opMode.opModeIsActive()) {
+        } //turning
+        while (Math.abs(gamepad1.right_stick_x) > 0.2 && this.opMode.opModeIsActive()) {
             if (gamepad1.right_stick_x > 0) {
                 this.telemetry.addData(DRIVE_TRAIN_CAPTION, "robot is turning right!");
                 double wheelPower = gamepad1.right_stick_x;

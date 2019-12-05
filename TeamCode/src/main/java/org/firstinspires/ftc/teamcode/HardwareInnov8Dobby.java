@@ -31,10 +31,11 @@ public class HardwareInnov8Dobby
     public DcMotor  motorFour      = null; // Back right wheel
     public DcMotor liftMotor       = null; // Lift
     public DcMotor liftMotor2      = null; //other Lift motor
+    public DcMotor handMotor       = null;
 
     // Example for servos
 
-    public Servo    handServo      = null;
+    //public Servo    handServo      = null;
     public Servo    baseServoLeft  = null;
     public Servo    baseServoRight = null;
     public CRServo  rapServoLeft   = null;
@@ -76,12 +77,14 @@ public class HardwareInnov8Dobby
         motorFour   = this.hwMap.dcMotor.get("motorFour");
         liftMotor   = this.hwMap.dcMotor.get("liftMotor");
         liftMotor2  = this.hwMap.dcMotor.get("liftMotor2");
+        handMotor   = this.hwMap.dcMotor.get("handMotor");
         motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorTwo.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorFour.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         liftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         liftMotor2.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        handMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //leftSensor = this.hwMap.colorSensor.get("leftSensor");
         //rightSensor = this.hwMap.colorSensor.get("rightSensor");
 
@@ -104,12 +107,13 @@ public class HardwareInnov8Dobby
         motorFour.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        handMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
 
         // Example
-        handServo = hwMap.servo.get("handServo");
-        handServo.setPosition(START_SERVO);
+        //handServo = hwMap.servo.get("handServo");
+        //handServo.setPosition(END_SERVO);
         baseServoLeft = hwMap.servo.get("baseServoLeft");
         baseServoLeft.setPosition(0.1);
         baseServoRight = hwMap.servo.get("baseServoRight");
