@@ -53,22 +53,34 @@ public class Dobby {
     }
     public void autonomous() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
-        driveTrain.goForward(18.00); // assuming robot is 18" long & camera is on front of robot
+        driveTrain.goForward(24.00); // assuming robot is 18" long & camera is on front of robot
         int blockNum = 1;
-        //if(blockNum<=6 /*&& !vuforia.isSkystone()*/ && this.opMode.opModeIsActive()){
-         //   this.telemetry.addData("Block Number is", blockNum);
-          //  //this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
-          //  driveTrain.goRight(8.0);
-          //  this.telemetry.update();
-          //  blockNum++;
-        //}
+        if(blockNum<=2 && !vuforia.isSkystone() && this.opMode.opModeIsActive()){
+            this.telemetry.addData("Block Number is", blockNum);
+            this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
+            driveTrain.goRight(8.0);
+            this.telemetry.update();
+             blockNum++;
+        }
         //pickup.rapOut(100);
         //pickup.handClose();
         //lift.moveUp(3);
-        driveTrain.turn(90);
-       // driveTrain.goForward(blockNum*8 + 60.0); // should end up in "building zone"
+        //driveTrain.turn(90);
+        driveTrain.goLeft(blockNum*8 + 60.0); // should end up in "building zone"
        // pickup.handOpen();
+        driveTrain.goForward(4);
+        driveTrain.goBackward(26);
+        driveTrain.goRight(48);
         this.telemetry.update();
+    }
+
+    public void testLeft() {
+        driveTrain.goLeft(24);
+    }
+
+    public void testRight() {
+        //driveTrain.goRight(24);
+        driveTrain.goForward(120);
     }
 
     public void autoPark() {
