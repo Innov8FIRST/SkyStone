@@ -13,7 +13,7 @@ public class BaseMover {
     LinearOpMode opMode;
 
     double motorsUp = 0;
-    double motorsDown = 0.5;
+    double motorsDown = 1;
 
     public BaseMover(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
         this.opMode = opMode;
@@ -42,10 +42,12 @@ public class BaseMover {
         this.telemetry.update();
 
         if (gamepad1.y) {
-            this.raiseMotors();
+            this.robot.baseServoLeft.setPosition(motorsUp);
+            this.robot.baseServoRight.setPosition(motorsUp);
         }
         if (gamepad1.a) {
-            this.lowerMotors();
+            this.robot.baseServoLeft.setPosition(motorsDown);
+            this.robot.baseServoRight.setPosition(motorsDown);
         }
 
     }

@@ -23,7 +23,7 @@ public class DriveTrain {
     double wheelOnePower = 0.55; // 0.5 // The standard power for the wheels, will probably be changed later
     double wheelTwoPower = 0.7; // 0.7
     double wheelThreePower = 0.35; //0.35
-    double wheelFourPower = 0.5; // 0.55
+    double wheelFourPower = 0.2; // 0.55
     double inchToTick = (360/9); // The number of encoder ticks per inch for our wheels, currently from google
     double sideInchToTick = 1; // The number of encoder ticks for one inch while travelling sideways, change later
     double startPosition = 0;
@@ -69,10 +69,10 @@ public class DriveTrain {
             this.telemetry.addData("EndPosition", endPosition);
             this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
             this.telemetry.update();
-            this.robot.motorOne.setPower(wheelOnePower);
-            this.robot.motorTwo.setPower(wheelTwoPower);
-            this.robot.motorThree.setPower(wheelThreePower);
-            this.robot.motorFour.setPower(wheelFourPower);
+            this.robot.motorOne.setPower(0.2 * wheelOnePower);
+            this.robot.motorTwo.setPower(0.2 * wheelTwoPower);
+            this.robot.motorThree.setPower(0.2 * wheelThreePower);
+            this.robot.motorFour.setPower(0.2 * wheelFourPower);
         }
         this.stop();
         this.telemetry.update();
@@ -140,6 +140,8 @@ public class DriveTrain {
      * @param degreesToTurn Number of degrees to turn. If negative, turns right. If positive, turns left.
      */
     public void turn(double degreesToTurn) {
+        double turnCorrector = 0.725;
+        degreesToTurn = degreesToTurn * turnCorrector;
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         if (degreesToTurn < 0) {
@@ -172,9 +174,15 @@ public class DriveTrain {
 
     public void goLeft(double inches) {
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving left");
+
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition - (inches * sideInchToTick); // How far you need to travel
-        while (this.robot.motorOne.getCurrentPosition() > endPosition && this.opMode.opModeIsActive()) {
+        while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
+            Log.d("Dobby", "End Position: " + endPosition);
+            Log.d("Dobby", "Start Pos: " + startPosition);
+            Log.d("Dobby", "Current Pos: " + this.robot.motorOne.getCurrentPosition());
+
+
             this.robot.motorOne.setPower(-wheelOnePower);
             this.robot.motorTwo.setPower(wheelTwoPower);
             this.robot.motorThree.setPower(wheelThreePower); // May need to go other direction
@@ -186,9 +194,9 @@ public class DriveTrain {
 
     public void goRight(double inches) {
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving right");
-        startPosition = this.robot.motorFour.getCurrentPosition();
+        startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * sideInchToTick); // How far you need to travel
-        while (this.robot.motorFour.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
+        while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
             Log.d("goRight", "start position is " + startPosition);
             Log.d("goRight", "end position is " + endPosition);
             Log.d("goRight", "current position is " + this.robot.motorFour.getCurrentPosition());
@@ -248,8 +256,8 @@ public class DriveTrain {
                 this.robot.motorThree.setPower(wheelPower * wheelThreePower);
                 this.robot.motorFour.setPower(-wheelPower * wheelThreePower);
             }
-        }
-        if (Math.abs(gamepad1.right_stick_x) > 0.2 && this.opMode.opModeIsActive()) {
+        } //turning
+        while (Math.abs(gamepad1.right_stick_x) > 0.2 && this.opMode.opModeIsActive()) {
             if (gamepad1.right_stick_x > 0) {
                 this.telemetry.addData(DRIVE_TRAIN_CAPTION, "robot is turning right!");
                 double wheelPower = gamepad1.right_stick_x;

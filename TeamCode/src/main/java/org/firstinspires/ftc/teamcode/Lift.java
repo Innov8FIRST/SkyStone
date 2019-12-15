@@ -12,8 +12,8 @@ public class Lift {
     HardwareInnov8Dobby robot;
     LinearOpMode opMode;
 
-    double inchesToTickLift = 1;
-    double liftPower = .7;
+    double inchesToTickLift = 120;
+    double liftPower = .3;
     double startLift = 0;
     double endLift = 0;
     double upperLimit = 100;
@@ -82,10 +82,13 @@ public class Lift {
 
         if (Math.abs(gamepad2.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {
             this.robot.liftMotor.setPower(gamepad2.left_stick_y);
+            this.robot.liftMotor2.setPower(gamepad2.left_stick_y);
 
         }
         if (Math.abs(gamepad2.left_stick_y) <= 0.2) {
             this.robot.liftMotor.setPower(0);
+            this.robot.liftMotor2.setPower(0);
+
         }
 
     }

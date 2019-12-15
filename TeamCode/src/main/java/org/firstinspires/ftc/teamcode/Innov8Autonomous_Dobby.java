@@ -11,6 +11,7 @@ public class Innov8Autonomous_Dobby extends LinearOpMode
         Dobby dobby = new Dobby(telemetry, hardwareMap, this);
         waitForStart();
         dobby.useVuforia();
+        //dobby.autonomous();
 
     }
 }

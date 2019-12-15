@@ -44,10 +44,10 @@ import java.util.List;
 /**
  * This 2019-2020 OpMode illustrates the basics of using the TensorFlow Object Detection API to
  * determine the position of the Skystone game elements.
- *
+ * <p>
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
- *
+ * <p>
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
@@ -87,7 +87,7 @@ public class DobbyVuforia {
      */
     private TFObjectDetector tfod;
 
-    public DobbyVuforia(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
+    public DobbyVuforia(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode) {
         this.opMode = opMode;
         this.telemetry = telemetry;
         this.robot = robot;
@@ -102,12 +102,13 @@ public class DobbyVuforia {
         }
     }
 
-    public boolean isSkystone(){
+    public boolean isSkystone() {
         while (this.opMode.opModeIsActive()) {
             if (tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
                 List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                // step through the list of recognitions and display boundary info.
                 if (updatedRecognitions != null) {
                     this.telemetry.addData("# Object Detected", updatedRecognitions.size());
 
@@ -119,12 +120,16 @@ public class DobbyVuforia {
                                 recognition.getLeft(), recognition.getTop());
                         this.telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                 recognition.getRight(), recognition.getBottom());
-                        if(recognition.getLabel().equals(LABEL_SECOND_ELEMENT)){
-                            return true;
-                        }
+                        if (updatedRecognitions != null) {
+                            this.telemetry.addData("# Object Detected", updatedRecognitions.size());
 
+                            if (recognition.getLabel().equals(LABEL_SECOND_ELEMENT)) {
+                                return true;
+                            }
+
+                        }
+                        this.telemetry.update();
                     }
-                    this.telemetry.update();
                 }
             }
         }
@@ -160,7 +165,8 @@ public class DobbyVuforia {
      * Initialize the TensorFlow Object Detection engine.
      */
     private void initTfod() {
-        int tfodMonitorViewId = this.robot.madEyeID;
+        int tfodMonitorViewId = robot.hwMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", robot.hwMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minimumConfidence = 0.8;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
