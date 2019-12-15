@@ -8,58 +8,67 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.CameraName;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+
 /**
  * This is NOT an opmode.
- *
+ * <p>
  * This class can be used to define all the specific hardware for a single robot.
  * In this case that robot is a Pushbot.
  * See PushbotTeleopTank_Iterative and others classes starting with "Pushbot" for usage examples.
- *
+ * <p>
  * This hardware class assumes the following device names have been configured on the robot:
  * Note:  All names are lower case and some have single spaces between words.
- *
+ * <p>
  * Motor channel:  Left  drive motor:        "left_drive"
  * Motor channel:  Right drive motor:        "right_drive"
  */
-public class HardwareInnov8Dobby
-{
+public class HardwareInnov8Dobby {
     /* Public OpMode members. */
-    public DcMotor  motorOne       = null; // Front left wheel
-    public DcMotor  motorTwo       = null; // Back left  wheel
-    public DcMotor  motorThree     = null; // Front right wheel
-    public DcMotor  motorFour      = null; // Back right wheel
-    public DcMotor liftMotor       = null; // Lift
+    public DcMotor motorOne = null; // Front left wheel
+    public DcMotor motorTwo = null; // Back left  wheel
+    public DcMotor motorThree = null; // Front right wheel
+    public DcMotor motorFour = null; // Back right wheel
+    public DcMotor liftMotor = null; // Lift
 
     // Example for servos
 
-    public Servo    handServo      = null;
-    public Servo    baseServoLeft  = null;
-    public Servo    baseServoRight = null;
-    public Servo    rapServoLeft   = null;
-    public Servo    rapServoRight  = null;
+    public Servo handServo = null;
+    public Servo baseServoLeft = null;
+    public Servo baseServoRight = null;
+    public Servo rapServoLeft = null;
+    public Servo rapServoRight = null;
 
 
-    public ColorSensor leftSensor  = null;
+    public ColorSensor leftSensor = null;
     public ColorSensor rightSensor = null;
+    public int madEyeID;
 
     public BNO055IMU imu;
 
     // Examples for servos
 
-    public static final double MID_SERVO       =  0.5 ;
+    public static final double MID_SERVO = 0.5;
     //public static final double ARM_UP_POWER    =  0.45 ;
     //public static final double ARM_DOWN_POWER  = -0.45 ;
-    public static final double START_SERVO     = 0 ; // all the way down
-    public static final double END_SERVO       = 1 ; // all the way up
+    public static final double START_SERVO = 0; // all the way down
+    public static final double END_SERVO = 1; // all the way up
 
     /* local OpMode members. */
-    HardwareMap hwMap           =  null;
-    private ElapsedTime period  = new ElapsedTime();
+    HardwareMap hwMap = null;
+    private ElapsedTime period = new ElapsedTime();
 
     /* Constructor */
-    public HardwareInnov8Dobby(HardwareMap ahwMap){
+    public HardwareInnov8Dobby(HardwareMap ahwMap) {
         this.hwMap = ahwMap;
-        this.init(ahwMap);
+        //this.init(ahwMap);
+        madEyeID =
+                hwMap.appContext
+                .getResources()
+                .getIdentifier("cameraMonitorViewId",
+                        "id",
+                        hwMap.appContext.getPackageName());
     }
 
     /* Initialize standard Hardware interfaces */
@@ -68,11 +77,11 @@ public class HardwareInnov8Dobby
 
 
         // Define and Initialize Motors
-        motorOne    = this.hwMap.dcMotor.get("motorOne");
-        motorTwo    = this.hwMap.dcMotor.get("motorTwo");
-        motorThree  = this.hwMap.dcMotor.get("motorThree");
-        motorFour   = this.hwMap.dcMotor.get("motorFour");
-        liftMotor   = this.hwMap.dcMotor.get("liftMotor");
+        motorOne = this.hwMap.dcMotor.get("motorOne");
+        motorTwo = this.hwMap.dcMotor.get("motorTwo");
+        motorThree = this.hwMap.dcMotor.get("motorThree");
+        motorFour = this.hwMap.dcMotor.get("motorFour");
+        liftMotor = this.hwMap.dcMotor.get("liftMotor");
         motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorTwo.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
@@ -80,6 +89,11 @@ public class HardwareInnov8Dobby
         liftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //leftSensor = this.hwMap.colorSensor.get("leftSensor");
         //rightSensor = this.hwMap.colorSensor.get("rightSensor");
+        madEyeID = hwMap.appContext
+                .getResources()
+                .getIdentifier("cameraMonitorViewId",
+                        "id",
+                        hwMap.appContext.getPackageName());
 
         imu = this.hwMap.get(BNO055IMU.class, "imu");
 
@@ -126,7 +140,7 @@ public class HardwareInnov8Dobby
      */
     public void waitForTick(long periodMs) throws InterruptedException {
 
-        long  remaining = periodMs - (long)period.milliseconds();
+        long remaining = periodMs - (long) period.milliseconds();
 
         // sleep for the remaining portion of the regular cycle period.
         if (remaining > 0)

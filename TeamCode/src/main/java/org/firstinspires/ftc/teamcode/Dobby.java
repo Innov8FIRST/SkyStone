@@ -23,8 +23,8 @@ public class Dobby {
         this.telemetry = telemetry;
         vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
         //pickup = new Pickup(this.telemetry);
-        lift = new Lift(this.telemetry, this.robot, this.opMode);
-        driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
+        //lift = new Lift(this.telemetry, this.robot, this.opMode);
+        //driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
 }
@@ -66,5 +66,9 @@ public class Dobby {
         //driveTrain.goToLine(false);
 
         this.telemetry.update();
+    }
+    public void useVuforia(){
+        while(this.opMode.opModeIsActive());
+
     }
 }
