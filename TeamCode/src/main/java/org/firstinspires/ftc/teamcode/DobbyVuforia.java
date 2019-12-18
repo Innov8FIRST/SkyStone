@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -120,15 +121,13 @@ public class DobbyVuforia {
                                 recognition.getLeft(), recognition.getTop());
                         this.telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
                                 recognition.getRight(), recognition.getBottom());
-                        if (updatedRecognitions != null) {
-                            this.telemetry.addData("# Object Detected", updatedRecognitions.size());
-
-                            if (recognition.getLabel().equals(LABEL_SECOND_ELEMENT)) {
-                                return true;
-                            }
-
+                        this.telemetry.addData(String.format("  angle (%d)", i), recognition.estimateAngleToObject(AngleUnit.DEGREES));
+                        this.telemetry.addData("# Object Detected", updatedRecognitions.size());
+                        if (recognition.getLabel().equals(LABEL_SECOND_ELEMENT)) {
+                            return true;
                         }
                         this.telemetry.update();
+                        i++;
                     }
                 }
             }
@@ -150,7 +149,7 @@ public class DobbyVuforia {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(this.robot.madEyeID);
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraName = this.robot.hwMap.get(WebcamName.class, "madEye");
