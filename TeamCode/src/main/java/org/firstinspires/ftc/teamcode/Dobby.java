@@ -22,11 +22,11 @@ public class Dobby {
         this.opMode = opMode;
         this.robot = new HardwareInnov8Dobby(hwmap);
         this.telemetry = telemetry;
-        vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
-        //pickup = new Pickup(this.telemetry, this.robot, this.opMode);
-        //lift = new Lift(this.telemetry, this.robot, this.opMode);
+        //vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
+        pickup = new Pickup(this.telemetry, this.robot, this.opMode);
+        lift = new Lift(this.telemetry, this.robot, this.opMode);
         driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
-        //baseMover = new BaseMover(this.telemetry, this.robot, this.opMode);
+        baseMover = new BaseMover(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is ready to go");
         this.telemetry.update();
 }
@@ -45,9 +45,9 @@ public class Dobby {
         while (this.opMode.opModeIsActive()) {
             this.telemetry.addData(DOBBY_CAPTION, "Dobby is teleop-ing");
             driveTrain.teleopUpdate(gamepad1, gamepad2);
-//            pickup.teleopUpdate(gamepad1, gamepad2);
-//            lift.teleopUpdate(gamepad1, gamepad2);
-//            baseMover.teleopUpdate(gamepad1, gamepad2);
+            pickup.teleopUpdate(gamepad1, gamepad2);
+            lift.teleopUpdate(gamepad1, gamepad2);
+            baseMover.teleopUpdate(gamepad1, gamepad2);
             this.telemetry.update();
         }
     }
