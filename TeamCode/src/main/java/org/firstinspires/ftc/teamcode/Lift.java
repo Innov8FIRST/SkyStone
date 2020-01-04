@@ -13,7 +13,7 @@ public class Lift {
     LinearOpMode opMode;
 
     double inchesToTickLift = 120;
-    double liftPower = .3;
+    double liftPower = .5;
     double startLift = 0;
     double endLift = 0;
     double upperLimit = 100;
@@ -78,6 +78,7 @@ public class Lift {
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
 
         this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
+        this.telemetry.addData(LIFT_CAPTION, this.robot.liftMotor.getCurrentPosition());
         telemetry.addData("2_left_stick_y", gamepad1.left_stick_y);
         this.telemetry.update();
 
@@ -86,7 +87,7 @@ public class Lift {
         }
 
         if (gamepad2.dpad_down) {
-            liftSpeed = liftSpeed - 0.05;
+            liftSpeed = liftSpeed - 0.1;
         }
 
         if (Math.abs(gamepad2.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {

@@ -22,7 +22,7 @@ public class Dobby {
         this.opMode = opMode;
         this.robot = new HardwareInnov8Dobby(hwmap);
         this.telemetry = telemetry;
-        //vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
+        vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
         pickup = new Pickup(this.telemetry, this.robot, this.opMode);
         lift = new Lift(this.telemetry, this.robot, this.opMode);
         driveTrain = new DriveTrain(this.telemetry, this.robot, this.opMode);
@@ -51,53 +51,65 @@ public class Dobby {
             this.telemetry.update();
         }
     }
-    public void autonomousOne() {
+    public void blueNoBase() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
         driveTrain.goForward(24.00); // assuming robot is 18" long & camera is on front of robot
-//        int blockNum = 1;
-//        while(blockNum<=3 && !vuforia.isSkystone() && this.opMode.opModeIsActive()){
-//            this.telemetry.addData("Block Number is", blockNum);
-//            this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
-//            driveTrain.goRight(8.0);
-//            this.telemetry.update();
-//             blockNum++;
-//        }
+        int blockNum = 1;
+        while(blockNum<=3 && !vuforia.isSkystone() && this.opMode.opModeIsActive()){
+            this.telemetry.addData("Block Number is", blockNum);
+            this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
+            driveTrain.goRight(8.0);
+            this.telemetry.update();
+             blockNum++;
+        }
         pickup.rapOut(100);
         pickup.handOpen(100);
+        pickup.rapOut((100));
         pickup.handClose((100));
         lift.moveUp(1);
         driveTrain.turn(90);
-        driveTrain.goForward(60.0); // should end up in "building zone"
-        driveTrain.turn(-90);
-        lift.moveUp(2);
-        pickup.rapOut(50);
+        driveTrain.goForward(60.0 + blockNum*8); // should end up in "building zone"
         pickup.handOpen(50);
-        //driveTrain.goForward(4);
         driveTrain.goBackward(26);
-        driveTrain.goRight(48);
         this.telemetry.update();
     }
 
-    public void autonomousTwo() {
+    public void redNoBase() {
 
     }
+
+    public void blueFull(){
+
+    }
+
+    public void redFull(){
+
+    }
+
+    public void blueFull2(){
+
+    }
+
+    public void redFull2(){
+
+    }
+
+    public void autoSimple() {
+        driveTrain.goForward(12.00); // assuming robot is 18" long & camera is on front of robot
+    }
+
+    public void blueBaseOnly(){
+
+    }
+
+    public void redBaseOnly(){
+
+    }
+
     public void useVuforia(){
         while(this.opMode.opModeIsActive()) {
             telemetry.addData("Is Skystone", vuforia.isSkystone());
             telemetry.update();
         }
-    }
-
-    public void testLeft() {
-        driveTrain.goLeft(24);
-    }
-
-    public void testRight() {
-        //driveTrain.goRight(24);
-        driveTrain.goForward(120);
-    }
-
-    public void autoPark() {
-        driveTrain.goForward(12.00); // assuming robot is 18" long & camera is on front of robot
     }
 }
