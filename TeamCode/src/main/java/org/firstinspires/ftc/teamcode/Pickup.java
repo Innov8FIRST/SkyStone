@@ -57,6 +57,25 @@ public class Pickup {
         //moves rack and pinion in
     }
 
+    public void handOpen(int timeCount){
+        this.telemetry.addData("Hand status: ","Hand is opening");
+        int counter = 0;
+        while(this.opMode.opModeIsActive() && counter < timeCount){
+            this.robot.handMotor.setPower(-0.5);
+            counter++;
+        }
+    }
+    public void handClose(int timeCount){
+        this.telemetry.addData("Hand status: ","Hand is opening");
+        int counter = 0;
+        while(this.opMode.opModeIsActive() && counter < timeCount){
+            this.robot.handMotor.setPower(0.5);
+            counter++;
+        }
+    }
+
+
+
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
         this.telemetry.addData("pickupStatus", "Teleop update called");
         this.telemetry.update();

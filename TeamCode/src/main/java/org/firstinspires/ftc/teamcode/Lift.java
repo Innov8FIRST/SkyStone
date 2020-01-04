@@ -18,6 +18,7 @@ public class Lift {
     double endLift = 0;
     double upperLimit = 100;
     double lowerLimit = 0;
+    double liftSpeed = .8;
 
     public Lift(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
 
@@ -80,9 +81,17 @@ public class Lift {
         telemetry.addData("2_left_stick_y", gamepad1.left_stick_y);
         this.telemetry.update();
 
+        if (gamepad2.dpad_up) {
+            liftSpeed = liftSpeed + 0.05;
+        }
+
+        if (gamepad2.dpad_down) {
+            liftSpeed = liftSpeed - 0.05;
+        }
+
         if (Math.abs(gamepad2.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {
-            this.robot.liftMotor.setPower(gamepad2.left_stick_y);
-            this.robot.liftMotor2.setPower(gamepad2.left_stick_y);
+            this.robot.liftMotor.setPower(gamepad2.left_stick_y * liftSpeed);
+            this.robot.liftMotor2.setPower(gamepad2.left_stick_y * liftSpeed);
 
         }
         if (Math.abs(gamepad2.left_stick_y) <= 0.2) {
