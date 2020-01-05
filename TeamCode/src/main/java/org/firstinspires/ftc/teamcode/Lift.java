@@ -12,7 +12,7 @@ public class Lift {
     HardwareInnov8Dobby robot;
     LinearOpMode opMode;
 
-    double inchesToTickLift = -10;
+    double inchesToTickLift = -742/6.0; //goes up 6" in -742 encoder ticks
     double liftPower = .5;
     double startLift = 0;
     double endLift = 0;
