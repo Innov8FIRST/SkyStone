@@ -79,8 +79,8 @@ public class Pickup {
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
         this.telemetry.addData("pickupStatus", "Teleop update called");
         this.telemetry.update();
-        this.robot.rapServoLeft.setPower(gamepad2.right_stick_x);
-        this.robot.rapServoRight.setPower(-gamepad2.right_stick_x);
+        this.robot.rapServoLeft.setPower(gamepad2.right_stick_y);
+        this.robot.rapServoRight.setPower(-gamepad2.right_stick_y);
 
         if (gamepad2.right_bumper) {
             this.robot.handMotor.setPower(.5);

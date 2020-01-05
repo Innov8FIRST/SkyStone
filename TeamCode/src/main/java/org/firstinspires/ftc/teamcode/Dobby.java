@@ -55,7 +55,7 @@ public class Dobby {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
         driveTrain.goForward(24.00); // assuming robot is 18" long & camera is on front of robot
         int blockNum = 1;
-        while(blockNum<=3 && !vuforia.isSkystone() && this.opMode.opModeIsActive()){
+        while(this.opMode.opModeIsActive() && blockNum<=3 && !vuforia.isSkystone()){
             this.telemetry.addData("Block Number is", blockNum);
             this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
             driveTrain.goRight(8.0);

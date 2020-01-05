@@ -27,24 +27,26 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
  */
 public class HardwareInnov8Dobby {
     /* Public OpMode members. */
-    public DcMotor  motorOne       = null; // Front left wheel
-    public DcMotor  motorTwo       = null; // Back left  wheel
-    public DcMotor  motorThree     = null; // Front right wheel
-    public DcMotor  motorFour      = null; // Back right wheel
-    public DcMotor liftMotor       = null; // Lift
-    public DcMotor liftMotor2      = null; //other Lift motor
-    public DcMotor handMotor       = null;
+    public DcMotor motorOne = null; // Front left wheel
+    public DcMotor motorTwo = null; // Back left  wheel
+    public DcMotor motorThree = null; // Front right wheel
+    public DcMotor motorFour = null; // Back right wheel
+    public DcMotor liftMotor = null; // Lift
+    public DcMotor liftMotor2 = null; //other Lift motor
+    public DcMotor handMotor = null;
+    public DcMotor baseMover = null;
+
 
     // Example for servos
 
-//    public Servo    handServo      = null;
-    public Servo    baseServoLeft  = null;
-    public Servo    baseServoRight = null;
-    public CRServo  rapServoLeft   = null;
-    public CRServo  rapServoRight  = null;
+    //    public Servo    handServo      = null;
+    public Servo baseServoLeft = null;
+    public Servo bHSupport = null;
+    public CRServo rapServoLeft = null;
+    public CRServo rapServoRight = null;
+    //
 //
-//
-    public ColorSensor leftSensor  = null;
+    public ColorSensor leftSensor = null;
     public ColorSensor rightSensor = null;
 //    public int madEyeID;
 
@@ -75,13 +77,14 @@ public class HardwareInnov8Dobby {
 
 
         // Define and Initialize Motors
-        motorOne    = this.hwMap.dcMotor.get("motorOne");
-        motorTwo    = this.hwMap.dcMotor.get("motorTwo");
-        motorThree  = this.hwMap.dcMotor.get("motorThree");
-        motorFour   = this.hwMap.dcMotor.get("motorFour");
-        liftMotor   = this.hwMap.dcMotor.get("liftMotor");
-        liftMotor2  = this.hwMap.dcMotor.get("liftMotor2");
-        handMotor   = this.hwMap.dcMotor.get("handMotor");
+        motorOne = this.hwMap.dcMotor.get("motorOne");
+        motorTwo = this.hwMap.dcMotor.get("motorTwo");
+        motorThree = this.hwMap.dcMotor.get("motorThree");
+        motorFour = this.hwMap.dcMotor.get("motorFour");
+        liftMotor = this.hwMap.dcMotor.get("liftMotor");
+        liftMotor2 = this.hwMap.dcMotor.get("liftMotor2");
+        handMotor = this.hwMap.dcMotor.get("handMotor");
+        baseMover = this.hwMap.dcMotor.get("baseMover");
         motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorTwo.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
@@ -89,6 +92,8 @@ public class HardwareInnov8Dobby {
         liftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         liftMotor2.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         handMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        baseMover.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+
 //        //leftSensor = this.hwMap.colorSensor.get("leftSensor");
 //        //rightSensor = this.hwMap.colorSensor.get("rightSensor");
 //        madEyeID = hwMap.appContext
@@ -107,6 +112,8 @@ public class HardwareInnov8Dobby {
         liftMotor.setPower(0);
         liftMotor2.setPower(0);
         handMotor.setPower(0);
+        baseMover.setPower(0);
+
 
         // Set all motors to run without encoders.
 
@@ -118,6 +125,8 @@ public class HardwareInnov8Dobby {
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         handMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        baseMover.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         // Define and initialize ALL installed servos.
 
@@ -125,9 +134,9 @@ public class HardwareInnov8Dobby {
         //handServo = hwMap.servo.get("handServo");
         //handServo.setPosition(END_SERVO);
         baseServoLeft = hwMap.servo.get("baseServoLeft");
-        baseServoLeft.setPosition(0.1);
-        baseServoRight = hwMap.servo.get("baseServoRight");
-        baseServoRight.setPosition(START_SERVO);
+        baseServoLeft.setPosition(0.2);
+        bHSupport = hwMap.servo.get("bHSupport");
+        bHSupport.setPosition(START_SERVO);
         rapServoLeft = hwMap.crservo.get("rapServoLeft");
         rapServoLeft.setPower(0);
         rapServoRight = hwMap.crservo.get("rapServoRight");

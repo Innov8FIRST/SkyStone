@@ -12,20 +12,19 @@ public class Lift {
     HardwareInnov8Dobby robot;
     LinearOpMode opMode;
 
-    double inchesToTickLift = 120;
+    double inchesToTickLift = -10;
     double liftPower = .5;
     double startLift = 0;
     double endLift = 0;
     double upperLimit = 100;
     double lowerLimit = 0;
-    double liftSpeed = .8;
 
-    public Lift(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
+    public Lift(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode) {
 
         this.opMode = opMode;
         this.robot = robot;
         this.telemetry = telemetry;
-        this.telemetry.addData(LIFT_CAPTION,"Lift is initialized");
+        this.telemetry.addData(LIFT_CAPTION, "Lift is initialized");
         this.telemetry.update();
         this.robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
@@ -36,35 +35,35 @@ public class Lift {
         this.telemetry.update();
     }
 
-    public void moveUp(double inches){
+    public void moveUp(double inches) {
         startLift = this.robot.liftMotor.getCurrentPosition();
         endLift = startLift + (inches * inchesToTickLift);
         while (this.opMode.opModeIsActive() && this.robot.liftMotor.getCurrentPosition() < endLift && this.robot.liftMotor.getCurrentPosition() < upperLimit) {
             this.robot.liftMotor.setPower(liftPower);
-            this.telemetry.addData(LIFT_CAPTION,"Going up?");
+            this.telemetry.addData(LIFT_CAPTION, "Going up?");
             this.telemetry.addData("encoder value is ", this.robot.liftMotor.getCurrentPosition());
             this.telemetry.addData("startLift = ", startLift);
             this.telemetry.addData("endLift = ", endLift);
             this.telemetry.update();
         }
         this.stop();
-        this.telemetry.addData(LIFT_CAPTION,"Lift is moving");
+        this.telemetry.addData(LIFT_CAPTION, "Lift is moving");
         this.telemetry.update();
     }
 
-    public void moveDown(double inches){
+    public void moveDown(double inches) {
         startLift = this.robot.liftMotor.getCurrentPosition();
         endLift = startLift - (inches * inchesToTickLift);
         while (this.opMode.opModeIsActive() && this.robot.liftMotor.getCurrentPosition() > endLift && this.robot.liftMotor.getCurrentPosition() > lowerLimit) {
             this.robot.liftMotor.setPower(-liftPower);
-            this.telemetry.addData(LIFT_CAPTION,"Going down?");
+            this.telemetry.addData(LIFT_CAPTION, "Going down?");
             this.telemetry.addData("encoder value is ", this.robot.liftMotor.getCurrentPosition());
             this.telemetry.addData("startLift = ", startLift);
             this.telemetry.addData("endLift = ", endLift);
             this.telemetry.update();
         }
         this.stop();
-        this.telemetry.addData(LIFT_CAPTION,"Lift is moving");
+        this.telemetry.addData(LIFT_CAPTION, "Lift is moving");
         this.telemetry.update();
     }
 
@@ -75,26 +74,26 @@ public class Lift {
     }
 
 
-    public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
+    public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
 
         this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
-        this.telemetry.addData(LIFT_CAPTION, this.robot.liftMotor.getCurrentPosition());
         telemetry.addData("2_left_stick_y", gamepad1.left_stick_y);
+        this.telemetry.addData(LIFT_CAPTION, this.robot.liftMotor.getCurrentPosition());
+        this.telemetry.addData("Lift Motor Power", this.robot.liftMotor.getPower());
         this.telemetry.update();
 
-        if (gamepad2.dpad_up) {
-            liftSpeed = liftSpeed + 0.05;
+
+        if (gamepad2.left_stick_y < -0.2 && this.robot.liftMotor.getCurrentPosition() > -1698) {
+            this.robot.liftMotor.setPower(gamepad2.left_stick_y * liftPower);
+            this.robot.liftMotor2.setPower(gamepad2.left_stick_y * liftPower);
         }
 
-        if (gamepad2.dpad_down) {
-            liftSpeed = liftSpeed - 0.1;
+        if (gamepad2.left_stick_y > 0.2 && this.robot.liftMotor.getCurrentPosition() < 0) {
+            this.robot.liftMotor.setPower(gamepad2.left_stick_y * liftPower);
+            this.robot.liftMotor2.setPower(gamepad2.left_stick_y * liftPower);
         }
 
-        if (Math.abs(gamepad2.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {
-            this.robot.liftMotor.setPower(gamepad2.left_stick_y * liftSpeed);
-            this.robot.liftMotor2.setPower(gamepad2.left_stick_y * liftSpeed);
 
-        }
         if (Math.abs(gamepad2.left_stick_y) <= 0.2) {
             this.robot.liftMotor.setPower(0);
             this.robot.liftMotor2.setPower(0);

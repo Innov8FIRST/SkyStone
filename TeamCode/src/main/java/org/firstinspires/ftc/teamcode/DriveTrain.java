@@ -24,7 +24,7 @@ public class DriveTrain {
     double wheelTwoPower = 0.7; // 0.7
     double wheelThreePower = 0.35; //0.35
     double wheelFourPower = 0.2; // 0.55
-    double inchToTick = (360/9); // The number of encoder ticks per inch for our wheels, currently from google
+    double inchToTick = (360/6); // The number of encoder ticks per inch for our wheels, currently from google
     double sideInchToTick = 1; // The number of encoder ticks for one inch while travelling sideways, change later
     double startPosition = 0;
     double endPosition = 0;
@@ -82,7 +82,7 @@ public class DriveTrain {
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving backwards");
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition - (inches * inchToTick); // How far you need to travel
-        while (this.robot.motorOne.getCurrentPosition() > endPosition) {
+        while (this.robot.motorOne.getCurrentPosition() > endPosition && this.opMode.opModeIsActive()) {
             this.robot.motorOne.setPower(-wheelOnePower);
             this.robot.motorTwo.setPower(-wheelTwoPower);
             this.robot.motorThree.setPower(-wheelThreePower);
