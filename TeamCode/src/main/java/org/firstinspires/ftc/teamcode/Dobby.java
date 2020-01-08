@@ -53,23 +53,46 @@ public class Dobby {
     }
     public void blueNoBase() {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
-        driveTrain.goForward(24.00); // assuming robot is 18" long & camera is on front of robot
         int blockNum = 1;
-        while(this.opMode.opModeIsActive() && blockNum<=3 && !vuforia.isSkystone()){
+        //driveTrain.goForward(24.00); // assuming robot is 18" long & camera is on front of robot
+        this.telemetry.addData("auto status", "now entering while loop");
+        this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
+        this.telemetry.addData("Block Number is", blockNum);
+        this.telemetry.update();
+        while(this.opMode.opModeIsActive() && blockNum<=3 && !this.vuforia.isSkystone()){
+            this.telemetry.addData("auto status", "now in the while loop");
             this.telemetry.addData("Block Number is", blockNum);
             this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
             driveTrain.goRight(8.0);
             this.telemetry.update();
              blockNum++;
         }
+        this.telemetry.addData("auto status", "now extending rap");
+        this.telemetry.update();
         pickup.rapOut(100);
+        this.telemetry.addData("auto status", "now opening hand");
+        this.telemetry.update();
         pickup.handOpen(100);
+        this.telemetry.addData("auto status", "now extending rap");
+        this.telemetry.update();
         pickup.rapOut((100));
-        pickup.handClose((100));
-        lift.moveUp(1);
+        this.telemetry.addData("auto status", "now closing hand");
+        this.telemetry.update();
+        pickup.handClose(50);
+        this.telemetry.addData("auto status", "now lifting");
+        this.telemetry.update();
+        lift.moveUp(0.25);
+        this.telemetry.addData("auto status", "now turning");
+        this.telemetry.update();
         driveTrain.turn(90);
+        this.telemetry.addData("auto status", "now going forward");
+        this.telemetry.update();
         driveTrain.goForward(60.0 + blockNum*8); // should end up in "building zone"
+        this.telemetry.addData("auto status", "now opening hand");
+        this.telemetry.update();
         pickup.handOpen(50);
+        this.telemetry.addData("auto status", "now going backward");
+        this.telemetry.update();
         driveTrain.goBackward(26);
         this.telemetry.update();
     }
@@ -95,7 +118,7 @@ public class Dobby {
     }
 
     public void autoSimple() {
-        driveTrain.goForward(12.00); // assuming robot is 18" long & camera is on front of robot
+        driveTrain.goForward(12.00); // assuming robot is 18" long
     }
 
     public void blueBaseOnly(){

@@ -62,17 +62,20 @@ public class DriveTrain {
 
     public void goForward(double inches) {
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
+        this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
+        this.telemetry.update();
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * inchToTick); // How far you need to travel
         while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
+            this.robot.motorOne.setPower(0.5 * wheelOnePower);
+            this.robot.motorTwo.setPower(0.5 * wheelTwoPower);
+            this.robot.motorThree.setPower(0.5 * wheelThreePower);
+            this.robot.motorFour.setPower(0.5 * wheelFourPower);
             this.telemetry.addData("StartPosition", startPosition);
             this.telemetry.addData("EndPosition", endPosition);
             this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
+            this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
             this.telemetry.update();
-            this.robot.motorOne.setPower(0.2 * wheelOnePower);
-            this.robot.motorTwo.setPower(0.2 * wheelTwoPower);
-            this.robot.motorThree.setPower(0.2 * wheelThreePower);
-            this.robot.motorFour.setPower(0.2 * wheelFourPower);
         }
         this.stop();
         this.telemetry.update();
@@ -210,11 +213,15 @@ public class DriveTrain {
     }
 
     public void stop() {
-        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Drive train is stopped");
+        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Stopping the drive train");
+        this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
+        this.telemetry.update();
         this.robot.motorOne.setPower(0);
         this.robot.motorTwo.setPower(0);
         this.robot.motorThree.setPower(0);
         this.robot.motorFour.setPower(0);
+        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Drive train is stopped");
+        this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
         this.telemetry.update();
     }
 
