@@ -124,7 +124,7 @@ public class HardwareInnov8Dobby {
         motorFour.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        handMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        handMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         baseMover.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
@@ -136,7 +136,7 @@ public class HardwareInnov8Dobby {
         baseServoLeft = hwMap.servo.get("baseServoLeft");
         baseServoLeft.setPosition(0.2);
         bHSupport = hwMap.servo.get("bHSupport");
-        bHSupport.setPosition(START_SERVO);
+        bHSupport.setPosition(0.1);
         rapServoLeft = hwMap.crservo.get("rapServoLeft");
         rapServoLeft.setPower(0);
         rapServoRight = hwMap.crservo.get("rapServoRight");

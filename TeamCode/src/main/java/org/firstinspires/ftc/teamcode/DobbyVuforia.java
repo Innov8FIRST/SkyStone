@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -39,6 +41,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import org.firstinspires.ftc.robotcore.internal.vuforia.VuforiaException;
 
 import java.util.List;
 
@@ -57,6 +60,7 @@ public class DobbyVuforia {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Stone";
     private static final String LABEL_SECOND_ELEMENT = "Skystone";
+    boolean isBroken = false;
     Telemetry telemetry;
     HardwareInnov8Dobby robot;
     LinearOpMode opMode;
@@ -89,21 +93,30 @@ public class DobbyVuforia {
     private TFObjectDetector tfod;
 
     public DobbyVuforia(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode) {
-        this.opMode = opMode;
-        this.telemetry = telemetry;
-        this.robot = robot;
-        initVuforia();
-        if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
-            initTfod();
-        } else {
-            this.telemetry.addData("Sorry!", "This device is not compatible with TFOD");
-        }
-        if (tfod != null) {
-            tfod.activate();
+        try {
+            this.opMode = opMode;
+            this.telemetry = telemetry;
+            this.robot = robot;
+            initVuforia();
+            if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
+                initTfod();
+            } else {
+                this.telemetry.addData("Sorry!", "This device is not compatible with TFOD");
+            }
+            if (tfod != null) {
+                tfod.activate();
+            }
+        } catch (Exception e){
+            Log.e("Vuforia", "Broken", e);
+            e.printStackTrace();
+            isBroken = true;
         }
     }
 
     public boolean isSkystone() {
+        if(isBroken) {
+            return true;
+        }
         while (this.opMode.opModeIsActive()) {
             if (tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since

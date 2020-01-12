@@ -26,15 +26,15 @@ public class BaseMover {
     }
 
     public void raiseMotors() {
+        this.robot.bHSupport.setPosition(0.1);
         this.robot.baseServoLeft.setPosition(startServo);
-        //this.robot.baseServoRight.setPosition(motorsUp);
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
     }
 
     public void lowerMotors() {
         this.robot.baseServoLeft.setPosition(motorsDown);
-        //this.robot.baseServoRight.setPosition(motorsDown);
+        this.robot.bHSupport.setPosition(motorsDown);
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.update();
     }

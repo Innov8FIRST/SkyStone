@@ -20,12 +20,12 @@ public class DriveTrain {
     LinearOpMode opMode;
 
 
-    double wheelOnePower = 0.55; // 0.5 // The standard power for the wheels, will probably be changed later
-    double wheelTwoPower = 0.7; // 0.7
-    double wheelThreePower = 0.35; //0.35
-    double wheelFourPower = 0.2; // 0.55
-    double inchToTick = (360/6); // The number of encoder ticks per inch for our wheels, currently from google
-    double sideInchToTick = 1; // The number of encoder ticks for one inch while travelling sideways, change later
+    double wheelOnePower = 0.6325; // 0.55 // The standard power for the wheels, will probably be changed later
+    double wheelTwoPower = 0.8; // 0.7
+    double wheelThreePower = 0.4; //0.35
+    double wheelFourPower = 0.23; // 0.2
+    double inchToTick = (360/6); // The number of encoder ticks per inch for our wheels
+    double sideInchToTick = (360/6); // The number of encoder ticks for one inch while travelling sideways, change later
     double startPosition = 0;
     double endPosition = 0;
     double redLine = 0;  // One of the color sensor readings for the red line, definitely change later
