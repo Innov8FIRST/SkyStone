@@ -20,6 +20,9 @@ public class Dobby {
     Gamepad gamepad1 = new Gamepad();
     Gamepad gamepad2 = new Gamepad();
    HardwareInnov8Dobby robot;
+
+   double startPosition = 0;
+   double endPosition = 0;
     public Dobby(Telemetry telemetry, HardwareMap hwmap, LinearOpMode opMode){
         this.opMode = opMode;
         this.robot = new HardwareInnov8Dobby(hwmap);
@@ -43,6 +46,7 @@ public class Dobby {
         this.telemetry.update();
     }
     public void teleop(Gamepad gamepad1, Gamepad gamepad2){
+
         while (this.opMode.opModeIsActive()) {
             this.telemetry.addData(DOBBY_CAPTION, "Dobby is teleop-ing");
             driveTrain.teleopUpdate(gamepad1, gamepad2);
