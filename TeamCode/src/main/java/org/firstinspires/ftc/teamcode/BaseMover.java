@@ -47,13 +47,16 @@ public class BaseMover {
         this.telemetry.update();
 
         if (gamepad1.y) {
-            this.robot.baseMover.setPower(-0.2);
+            this.telemetry.addData("Base Mover Status",this.robot.baseMover.getCurrentPosition());
+            this.robot.baseMover.setPower(-0.8);
             isGoingUp = true;
             this.robot.bHSupport.setPosition(startServo);
             //this.robot.baseServoRight.setPosition(motorsUp);
         }
         if (gamepad1.a) {
-            this.robot.baseMover.setPower(0.2);
+            this.telemetry.addData("Base Mover Status",this.robot.baseMover.getCurrentPosition());
+            this.telemetry.update();
+            this.robot.baseMover.setPower(.8);
             isGoingUp = false;
             this.robot.baseServoLeft.setPosition(motorsDown);
             //this.robot.baseServoRight.setPosition(motorsDown);
