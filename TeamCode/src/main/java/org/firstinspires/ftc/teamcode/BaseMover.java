@@ -26,10 +26,12 @@ public class BaseMover {
         this.robot = robot;
         this.telemetry = telemetry;
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
+        this.telemetry.addData("base motor current pos.", this.robot.baseMover.getCurrentPosition());
         this.telemetry.update();
         while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
             this.robot.baseMover.setPower(-0.5);
             this.telemetry.addData("base motor current pos.", this.robot.baseMover.getCurrentPosition());
+            this.telemetry.update();
         }
         this.robot.baseMover.setPower(0);
         this.robot.baseServoLeft.setPosition(startServo);
@@ -41,7 +43,7 @@ public class BaseMover {
         this.telemetry.update();
         if  (this.opMode.opModeIsActive()) {
             this.robot.bHSupport.setPosition((0.1));
-            this.robot.baseServoLeft.setPosition(startServo);
+            this.robot.baseServoLeft.setPosition(0.2);
             while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
                 this.robot.baseMover.setPower(-0.5);
             }
@@ -71,14 +73,14 @@ public class BaseMover {
         this.telemetry.addData("base holder pos", this.robot.baseServoLeft.getPosition());
         this.telemetry.update();
 
-        if (gamepad1.y) {
-            this.telemetry.addData("Base Motor Status",this.robot.baseMover.getCurrentPosition());
+        if (gamepad1.y ) {
+            this.telemetry.addData("Base Motor Worm Status",this.robot.baseMover.getCurrentPosition());
             this.robot.baseMover.setPower(-0.8);
             isGoingUp = true;
-            this.robot.baseServoLeft.setPosition(startServo);
-            this.robot.bHSupport.setPosition(startServo);
+            this.robot.baseServoLeft.setPosition(0.2);
+            this.robot.bHSupport.setPosition(0.1);
         }
-        if (gamepad1.a && this.robot.baseMover.getCurrentPosition() > -1) {
+        if (gamepad1.a/* && this.robot.baseMover.getCurrentPosition() > -1*/) {
             Log.d("BaseMotorWorm Status","" + this.robot.baseMover.getCurrentPosition());
             this.telemetry.update();
             this.robot.baseMover.setPower(.8);
@@ -89,9 +91,6 @@ public class BaseMover {
 
         // Moves worm gear w/o limits
 
-        if (gamepad1.dpad_up) {
-            this.robot.baseMover.setPower(.8);
-        }
 
         if((!gamepad1.y && !gamepad1.a) || this.robot.baseMover.getCurrentPosition() < 0){
             this.robot.baseMover.setPower(0);

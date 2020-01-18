@@ -108,7 +108,7 @@ public class Pickup {
             this.robot.handMotor.setPower(0);
         }
         if (gamepad2.y) {
-            this.robot.ginny.setPosition(0.1);
+            this.robot.ginny.setPosition(0.2);
         }
         if (gamepad2.a) {
             this.robot.ginny.setPosition(0.5);

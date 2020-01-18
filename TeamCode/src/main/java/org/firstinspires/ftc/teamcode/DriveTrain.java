@@ -238,7 +238,7 @@ public class DriveTrain {
         telemetry.addData("1_right_stick_x", gamepad1.right_stick_x);
         telemetry.addData("1_right_stick_y", gamepad1.right_stick_y);
 
-        if (Math.abs(gamepad1.left_stick_y) > 0.2 && this.opMode.opModeIsActive()) {
+        if (Math.abs(gamepad1.left_stick_y) > 0.35 && this.opMode.opModeIsActive()) {
             double wheelPower = gamepad1.left_stick_y;
             this.robot.motorOne.setPower(-wheelPower * wheelOnePower);
             this.robot.motorTwo.setPower(-wheelPower * wheelTwoPower);
@@ -246,7 +246,7 @@ public class DriveTrain {
             this.robot.motorFour.setPower(-wheelPower * wheelFourPower);
 
         }
-        if (Math.abs(gamepad1.left_stick_x) > 0.5 && this.opMode.opModeIsActive()) {
+        if (Math.abs(gamepad1.left_stick_x) > 0.6 && this.opMode.opModeIsActive()) {
             if (gamepad1.left_stick_x > 0) {
                 this.telemetry.addData(DRIVE_TRAIN_CAPTION, "robot is going right!");
                 double wheelPower = gamepad1.left_stick_x;
@@ -280,6 +280,24 @@ public class DriveTrain {
                 this.robot.motorThree.setPower(wheelPower * wheelThreePower);
                 this.robot.motorFour.setPower(wheelPower * wheelFourPower);
             }
+        }
+
+        if (gamepad1.dpad_up) {
+            this.telemetry.addData("Zoom level:", "Zoomin'");
+            this.telemetry.update();
+            wheelOnePower = wheelOnePower * 1.1;
+            wheelTwoPower = wheelTwoPower * 1.1;
+            wheelThreePower = wheelThreePower * 1.1;
+            wheelFourPower = wheelFourPower * 1.1;
+        }
+
+        if (gamepad1.dpad_down) {
+            this.telemetry.addData("Zoom level:", "unzoomin'");
+            this.telemetry.update();
+            wheelOnePower = wheelOnePower * (10/11);
+            wheelTwoPower = wheelTwoPower * (10/11);
+            wheelThreePower = wheelThreePower * (10/11);
+            wheelFourPower = wheelFourPower * (10/11);
         }
 
         if (Math.abs(gamepad1.left_stick_x) < 0.2 && Math.abs(gamepad1.left_stick_y) < 0.2 && this.opMode.opModeIsActive()) {
