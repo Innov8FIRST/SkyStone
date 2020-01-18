@@ -89,7 +89,7 @@ public class HardwareInnov8Dobby {
         handMotor = this.hwMap.dcMotor.get("handMotor");
         baseMover = this.hwMap.dcMotor.get("baseMover");
         motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        motorTwo.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        motorTwo.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorFour.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         liftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors

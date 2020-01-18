@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "RedFull_Dobby", group = "Dobby")
+@Autonomous(name = "StraightRight_Dobby", group = "Dobby")
 public class StraightRight_Dobby extends LinearOpMode
 {
     @Override

@@ -125,13 +125,13 @@ public class Dobby {
         driveTrain.goForward(12); // assuming robot is 18" long
     }
     public void straightRight(){
-        driveTrain.goForward(28);
-        driveTrain.turn(-90);
+        driveTrain.goForward(24);
+        driveTrain.turn(-95);
         driveTrain.goForward((30));
     }
     public void straightLeft(){
-        driveTrain.goForward(28);
-        driveTrain.turn(90);
+        driveTrain.goForward(24);
+        driveTrain.turn(95);
         driveTrain.goForward((30));
     }
 
@@ -154,7 +154,21 @@ public class Dobby {
     }
 
     public void redBaseOnly() {
+        driveTrain.goForward(39);
+        baseMover.lowerMotors();
+        try {
+            Thread.sleep(1500);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
 
+        driveTrain.goBackward(31);
+        driveTrain.turn(-90);
+        driveTrain.goForward(12);
+        baseMover.raiseMotors();
+        driveTrain.goBackward(30);
+        baseMover.lowerMotors();
     }
 
     public void useVuforia() {

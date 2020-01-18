@@ -19,7 +19,7 @@ public class BaseMover {
     double motorsDown = 1;
     boolean isGoingUp = false;
     double startPosition = 0;
-    double endPosition = 1640/2;
+    double endPosition = 1640/1.5;
 
     public BaseMover(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
         this.opMode = opMode;

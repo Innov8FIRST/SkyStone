@@ -13,7 +13,7 @@ public class Lift {
     LinearOpMode opMode;
 
     double inchesToTickLift = -742/6.0; //goes up 6" in -742 encoder ticks
-    double liftPower = .5;
+    double liftPower = .7;
     double startLift = 0;
     double endLift = 0;
     double upperLimit = 100;

@@ -21,9 +21,10 @@ public class DriveTrain {
 
 
     double wheelOnePower = 0.6325; // 0.55 // The standard power for the wheels, will probably be changed later
-    double wheelTwoPower = 0.8; // 0.7
+    double wheelTwoPower = 0.5; // 0.7
     double wheelThreePower = 0.4; //0.35
     double wheelFourPower = 0.23; // 0.2
+    double wheelSpeedChanger = 1.1;
     double inchToTick = (360/6); // The number of encoder ticks per inch for our wheels
     double sideInchToTick = (360/6); // The number of encoder ticks for one inch while travelling sideways, change later
     double startPosition = 0;
@@ -285,19 +286,19 @@ public class DriveTrain {
         if (gamepad1.dpad_up) {
             this.telemetry.addData("Zoom level:", "Zoomin'");
             this.telemetry.update();
-            wheelOnePower = wheelOnePower * 1.1;
-            wheelTwoPower = wheelTwoPower * 1.1;
-            wheelThreePower = wheelThreePower * 1.1;
-            wheelFourPower = wheelFourPower * 1.1;
+            wheelOnePower = wheelOnePower * wheelSpeedChanger;
+            wheelTwoPower = wheelTwoPower * wheelSpeedChanger;
+            wheelThreePower = wheelThreePower * wheelSpeedChanger;
+            wheelFourPower = wheelFourPower * wheelSpeedChanger;
         }
 
         if (gamepad1.dpad_down) {
             this.telemetry.addData("Zoom level:", "unzoomin'");
             this.telemetry.update();
-            wheelOnePower = wheelOnePower * (10/11);
-            wheelTwoPower = wheelTwoPower * (10/11);
-            wheelThreePower = wheelThreePower * (10/11);
-            wheelFourPower = wheelFourPower * (10/11);
+            wheelOnePower = wheelOnePower/wheelSpeedChanger;
+            wheelTwoPower = wheelTwoPower/wheelSpeedChanger;
+            wheelThreePower = wheelThreePower/wheelSpeedChanger;
+            wheelFourPower = wheelFourPower/wheelSpeedChanger;
         }
 
         if (Math.abs(gamepad1.left_stick_x) < 0.2 && Math.abs(gamepad1.left_stick_y) < 0.2 && this.opMode.opModeIsActive()) {
