@@ -95,49 +95,49 @@ public class DriveTrain {
         this.telemetry.update();
     }
 
-    public void goRightToLine(boolean isRed) {
-        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving to line");
-        if (isRed == true) { // If we're on red alliance
-            while (this.robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
-                this.robot.motorOne.setPower(wheelOnePower); // May need to turn other direct
-                this.robot.motorTwo.setPower(-wheelTwoPower); // May need to turn other direction
-                this.robot.motorThree.setPower(-wheelThreePower);
-                this.robot.motorFour.setPower(wheelFourPower);
-            }
-        }
-        if (isRed == false) { // If we're on blue alliance
-            while (this.robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
-                this.robot.motorOne.setPower(wheelOnePower); // May need to turn other direct
-                this.robot.motorTwo.setPower(-wheelTwoPower); // May need to turn other direction
-                this.robot.motorThree.setPower(-wheelThreePower);
-                this.robot.motorFour.setPower(wheelFourPower);
-            }
-        }
-        this.stop();
-        this.telemetry.update();
-    }
+//    public void goRightToLine(boolean isRed) {
+//        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving to line");
+//        if (isRed == true) { // If we're on red alliance
+//            while (this.robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
+//                this.robot.motorOne.setPower(wheelOnePower); // May need to turn other direct
+//                this.robot.motorTwo.setPower(-wheelTwoPower); // May need to turn other direction
+//                this.robot.motorThree.setPower(-wheelThreePower);
+//                this.robot.motorFour.setPower(wheelFourPower);
+//            }
+//        }
+//        if (isRed == false) { // If we're on blue alliance
+//            while (this.robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
+//                this.robot.motorOne.setPower(wheelOnePower); // May need to turn other direct
+//                this.robot.motorTwo.setPower(-wheelTwoPower); // May need to turn other direction
+//                this.robot.motorThree.setPower(-wheelThreePower);
+//                this.robot.motorFour.setPower(wheelFourPower);
+//            }
+//        }
+//        this.stop();
+//        this.telemetry.update();
+//    }
 
-    public void goLeftToLine(boolean isRed) {
-        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving to line");
-        if (isRed == true) { // If we're on red alliance
-            while (this.robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
-                this.robot.motorOne.setPower(-wheelOnePower);
-                this.robot.motorTwo.setPower(wheelTwoPower);
-                this.robot.motorThree.setPower(wheelThreePower);
-                this.robot.motorFour.setPower(-wheelFourPower);
-            }
-        }
-        if (isRed == false) { // If we're on blue alliance
-            while (this.robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
-                this.robot.motorOne.setPower(-wheelOnePower);
-                this.robot.motorTwo.setPower(wheelTwoPower);
-                this.robot.motorThree.setPower(wheelThreePower);
-                this.robot.motorFour.setPower(-wheelFourPower);
-            }
-        }
-        this.stop();
-        this.telemetry.update();
-    }
+//    public void goLeftToLine(boolean isRed) {
+//        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving to line");
+//        if (isRed == true) { // If we're on red alliance
+//            while (this.robot.leftSensor.red() != redLine) { //Assumes we choose to look at the red value to determine line color
+//                this.robot.motorOne.setPower(-wheelOnePower);
+//                this.robot.motorTwo.setPower(wheelTwoPower);
+//                this.robot.motorThree.setPower(wheelThreePower);
+//                this.robot.motorFour.setPower(-wheelFourPower);
+//            }
+//        }
+//        if (isRed == false) { // If we're on blue alliance
+//            while (this.robot.leftSensor.blue() != blueLine) { //Assumes we choose to look at the blue value to determine line color
+//                this.robot.motorOne.setPower(-wheelOnePower);
+//                this.robot.motorTwo.setPower(wheelTwoPower);
+//                this.robot.motorThree.setPower(wheelThreePower);
+//                this.robot.motorFour.setPower(-wheelFourPower);
+//            }
+//        }
+//        this.stop();
+//        this.telemetry.update();
+//    }
 
     /**
      * @param degreesToTurn Number of degrees to turn. If negative, turns right. If positive, turns left.

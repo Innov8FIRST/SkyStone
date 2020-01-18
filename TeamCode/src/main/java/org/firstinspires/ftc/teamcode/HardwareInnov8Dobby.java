@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.CameraName;
@@ -42,12 +43,14 @@ public class HardwareInnov8Dobby {
     //    public Servo    handServo      = null;
     public Servo baseServoLeft = null;
     public Servo bHSupport = null;
+    public Servo ginny = null;
     public CRServo rapServoLeft = null;
     public CRServo rapServoRight = null;
     //
 //
-    public ColorSensor leftSensor = null;
-    public ColorSensor rightSensor = null;
+//  public ColorSensor leftSensor = null;
+//  public ColorSensor rightSensor = null;
+    public TouchSensor neville = null;
 //    public int madEyeID;
 
     public BNO055IMU imu;
@@ -96,6 +99,7 @@ public class HardwareInnov8Dobby {
 
 //        //leftSensor = this.hwMap.colorSensor.get("leftSensor");
 //        //rightSensor = this.hwMap.colorSensor.get("rightSensor");
+        neville = this.hwMap.touchSensor.get("neville");
 //        madEyeID = hwMap.appContext
 //                .getResources()
 //                .getIdentifier("cameraMonitorViewId",
@@ -137,6 +141,8 @@ public class HardwareInnov8Dobby {
         baseServoLeft.setPosition(0.2);
         bHSupport = hwMap.servo.get("bHSupport");
         bHSupport.setPosition(0.1);
+        ginny = hwMap.servo.get("ginny");
+        ginny.setPosition(0.5);
         rapServoLeft = hwMap.crservo.get("rapServoLeft");
         rapServoLeft.setPower(0);
         rapServoRight = hwMap.crservo.get("rapServoRight");

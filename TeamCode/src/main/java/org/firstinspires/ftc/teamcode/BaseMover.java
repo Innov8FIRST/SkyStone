@@ -19,37 +19,47 @@ public class BaseMover {
     double motorsDown = 1;
     boolean isGoingUp = false;
     double startPosition = 0;
-    double endPosition = 0;
-    double wormLimit = 1640;
+    double endPosition = 1640/2;
 
     public BaseMover(Telemetry telemetry, HardwareInnov8Dobby robot, LinearOpMode opMode){
         this.opMode = opMode;
         this.robot = robot;
         this.telemetry = telemetry;
-        this.telemetry.addData(BASE_MOVER_CAPTION,"BaseMover is initialized");
-        if  (this.opMode.opModeIsActive()) {
-            startPosition = this.robot.baseMover.getCurrentPosition();
-            endPosition = startPosition + wormLimit;
-            while (this.opMode.opModeIsActive() && this.robot.baseMover.getCurrentPosition() < endPosition) {
-                this.robot.baseMover.setPower(-0.5);
-            }
-        }
+        this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
+        while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
+            this.robot.baseMover.setPower(-0.5);
+            this.telemetry.addData("base motor current pos.", this.robot.baseMover.getCurrentPosition());
+        }
+        this.robot.baseMover.setPower(0);
+        this.robot.baseServoLeft.setPosition(startServo);
+        this.robot.bHSupport.setPosition((0.1));
     }
 
     public void raiseMotors() {
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
-        this.robot.baseMover.setPower(-.8);
-        this.robot.baseServoLeft.setPosition(startServo);
-        this.robot.bHSupport.setPosition((startServo));
+        if  (this.opMode.opModeIsActive()) {
+            this.robot.bHSupport.setPosition((0.1));
+            this.robot.baseServoLeft.setPosition(startServo);
+            while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
+                this.robot.baseMover.setPower(-0.5);
+            }
+            this.robot.baseMover.setPower(0);
+        }
 
     }
 
     public void lowerMotors() {
-        this.robot.baseMover.setPower(-.8);
-        this.robot.baseServoLeft.setPosition(motorsDown);
-        this.robot.bHSupport.setPosition(motorsDown);
+        if  (this.opMode.opModeIsActive()) {
+            this.robot.baseServoLeft.setPosition(motorsDown);
+            this.robot.bHSupport.setPosition(motorsDown);
+            while (this.opMode.opModeIsActive() && this.robot.baseMover.getCurrentPosition() > 0) {
+                this.robot.baseMover.setPower(0.5);
+            }
+            this.robot.baseMover.setPower(0);
+        }
+
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.update();
     }
@@ -67,7 +77,6 @@ public class BaseMover {
             isGoingUp = true;
             this.robot.baseServoLeft.setPosition(startServo);
             this.robot.bHSupport.setPosition(startServo);
-            //this.robot.baseServoRight.setPosition(motorsUp);
         }
         if (gamepad1.a && this.robot.baseMover.getCurrentPosition() > -1) {
             Log.d("BaseMotorWorm Status","" + this.robot.baseMover.getCurrentPosition());
