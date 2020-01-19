@@ -4,14 +4,11 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.CameraName;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
 /**
  * This is NOT an opmode.
@@ -28,10 +25,10 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
  */
 public class HardwareInnov8Dobby {
     /* Public OpMode members. */
-    public DcMotor motorOne = null; // Front left wheel
-    public DcMotor motorTwo = null; // Back left  wheel
-    public DcMotor motorThree = null; // Front right wheel
-    public DcMotor motorFour = null; // Back right wheel
+    public DcMotorEx motorOne = null; // Front left wheel
+    public DcMotorEx motorTwo = null; // Back left  wheel
+    public DcMotorEx motorThree = null; // Front right wheel
+    public DcMotorEx motorFour = null; // Back right wheel
     public DcMotor liftMotor = null; // Lift
     public DcMotor liftMotor2 = null; //other Lift motor
     public DcMotor handMotor = null;
@@ -49,7 +46,7 @@ public class HardwareInnov8Dobby {
     //
 //
 //  public ColorSensor leftSensor = null;
-//  public ColorSensor rightSensor = null;
+    public ColorSensor dumbledore = null;
     public TouchSensor neville = null;
 //    public int madEyeID;
 
@@ -80,10 +77,10 @@ public class HardwareInnov8Dobby {
 
 
         // Define and Initialize Motors
-        motorOne = this.hwMap.dcMotor.get("motorOne");
-        motorTwo = this.hwMap.dcMotor.get("motorTwo");
-        motorThree = this.hwMap.dcMotor.get("motorThree");
-        motorFour = this.hwMap.dcMotor.get("motorFour");
+        motorOne = this.hwMap.get(DcMotorEx.class, "motorOne");
+        motorTwo = this.hwMap.get(DcMotorEx.class, "motorTwo");
+        motorThree = this.hwMap.get(DcMotorEx.class, "motorThree");
+        motorFour = this.hwMap.get(DcMotorEx.class, "motorFour");
         liftMotor = this.hwMap.dcMotor.get("liftMotor");
         liftMotor2 = this.hwMap.dcMotor.get("liftMotor2");
         handMotor = this.hwMap.dcMotor.get("handMotor");
@@ -98,7 +95,7 @@ public class HardwareInnov8Dobby {
         baseMover.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
 
 //        //leftSensor = this.hwMap.colorSensor.get("leftSensor");
-//        //rightSensor = this.hwMap.colorSensor.get("rightSensor");
+        dumbledore = this.hwMap.colorSensor.get("dumbledore");
         neville = this.hwMap.touchSensor.get("neville");
 //        madEyeID = hwMap.appContext
 //                .getResources()

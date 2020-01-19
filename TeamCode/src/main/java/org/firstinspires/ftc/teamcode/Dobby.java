@@ -63,22 +63,29 @@ public class Dobby {
     }
 
     public void blueNoBase() {
-        vuforia = new DobbyVuforia(this.telemetry, this.robot, this.opMode);
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
         int blockNum = 1;
-        driveTrain.goForward(24.00); // assuming robot is 18" long & camera is on front of robot
+        baseMover.lowerMotors();
+        driveTrain.goForward(27.00); // assuming robot is 18" long & camera is on front of robot
         this.telemetry.addData("auto status", "now entering while loop");
-        this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
+        this.telemetry.addData("Red value", this.robot.dumbledore.red());
+        this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
+        this.telemetry.addData("Green value", this.robot.dumbledore.green());
+        this.telemetry.update();
         this.telemetry.addData("Block Number is", blockNum);
         this.telemetry.update();
-        while (this.opMode.opModeIsActive() && blockNum <= 3 && !this.vuforia.isSkystone()) {
+        while (this.opMode.opModeIsActive() && blockNum <= 3 &&
+                (this.robot.dumbledore.red() > 20 || this.robot.dumbledore.blue() > 20 || this.robot.dumbledore.green() > 20)) {
             this.telemetry.addData("auto status", "now in the while loop");
             this.telemetry.addData("Block Number is", blockNum);
-            this.telemetry.addData("Is Skystone", "" + vuforia.isSkystone());
-            driveTrain.goRight(8.0);
+            this.telemetry.addData("Red value", this.robot.dumbledore.red());
+            this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
+            this.telemetry.addData("Green value", this.robot.dumbledore.green());
             this.telemetry.update();
+            driveTrain.goRight(8.0);
             blockNum++;
         }
+        driveTrain.goLeft(6);
         Log.d("auto status", "now extending rap");
         pickup.rapOut(2000);
         Log.d("auto status", "now opening hand");
@@ -88,6 +95,7 @@ public class Dobby {
         pickup.handClose();
         Log.d("auto status", "now lifting");
         lift.moveUp(0.25);
+        driveTrain.goBackward(12);
         Log.d("auto status", "now turning");
         driveTrain.turn(90);
         this.robot.handMotor.setPower(0);

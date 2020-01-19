@@ -77,14 +77,14 @@ public class Pickup {
         int pastEncoder = this.robot.handMotor.getCurrentPosition();
         int currentEncoder;
         this.robot.handMotor.setPower(0.2);
-        while(pastEncoder != this.robot.handMotor.getCurrentPosition() && this.opMode.opModeIsActive()){
-            currentEncoder = this.robot.handMotor.getCurrentPosition();
-            this.robot.handMotor.setPower((0.2));
-            this.telemetry.addData("Past encoder value", pastEncoder);
-            this.telemetry.addData("current hand pos.", this.robot.handMotor.getCurrentPosition());
-            this.telemetry.update();
-            pastEncoder = currentEncoder;
-        }
+//        while(pastEncoder != this.robot.handMotor.getCurrentPosition() && this.opMode.opModeIsActive()){
+//            currentEncoder = this.robot.handMotor.getCurrentPosition();
+//            this.robot.handMotor.setPower((0.2));
+//            this.telemetry.addData("Past encoder value", pastEncoder);
+//            this.telemetry.addData("current hand pos.", this.robot.handMotor.getCurrentPosition());
+//            this.telemetry.update();
+//            pastEncoder = currentEncoder;
+//        }
     }
 
     public void ginnyDrop () {
@@ -113,6 +113,10 @@ public class Pickup {
         if (gamepad2.a) {
             this.robot.ginny.setPosition(0.5);
         }
+        this.telemetry.addData("Red value", this.robot.dumbledore.red());
+        this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
+        this.telemetry.addData("Green value", this.robot.dumbledore.green());
+        this.telemetry.update();
     }
 
 }
