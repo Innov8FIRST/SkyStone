@@ -68,22 +68,17 @@ public class DriveTrain {
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition + (inches * inchToTick); // How far you need to travel
         while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
-            this.robot.motorOne.setVelocity(720);
-            this.robot.motorTwo.setVelocity(720);
-            this.robot.motorThree.setVelocity(720);
-            this.robot.motorFour.setVelocity(720);
             this.telemetry.addData("StartPosition", startPosition);
             this.telemetry.addData("EndPosition", endPosition);
             this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
+            this.robot.motorOne.setPower(wheelOnePower);
+            this.robot.motorTwo.setPower(wheelTwoPower);
+            this.robot.motorThree.setPower((wheelThreePower));
+            this.robot.motorFour.setPower(wheelFourPower);
             Log.d("wheel one power", "" + this.robot.motorOne.getPower());
             Log.d("wheel two power", "" + this.robot.motorTwo.getPower());
             Log.d("wheel three power", "" + this.robot.motorThree.getPower());
             Log.d("wheel four power", "" + this.robot.motorFour.getPower());
-            Log.d("wheel one velocity", "" + this.robot.motorOne.getVelocity());
-            Log.d("wheel two velocity", "" + this.robot.motorTwo.getVelocity());
-            Log.d("wheel three velocity", "" + this.robot.motorThree.getVelocity());
-            Log.d("wheel four velocity", "" + this.robot.motorFour.getVelocity());
-
             this.telemetry.update();
         }
         this.stop();

@@ -25,10 +25,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 public class HardwareInnov8Dobby {
     /* Public OpMode members. */
-    public DcMotorEx motorOne = null; // Front left wheel
-    public DcMotorEx motorTwo = null; // Back left  wheel
-    public DcMotorEx motorThree = null; // Front right wheel
-    public DcMotorEx motorFour = null; // Back right wheel
+    public DcMotor motorOne = null; // Front left wheel
+    public DcMotor motorTwo = null; // Back left  wheel
+    public DcMotor motorThree = null; // Front right wheel
+    public DcMotor motorFour = null; // Back right wheel
     public DcMotor liftMotor = null; // Lift
     public DcMotor liftMotor2 = null; //other Lift motor
     public DcMotor handMotor = null;
@@ -77,10 +77,10 @@ public class HardwareInnov8Dobby {
 
 
         // Define and Initialize Motors
-        motorOne = this.hwMap.get(DcMotorEx.class, "motorOne");
-        motorTwo = this.hwMap.get(DcMotorEx.class, "motorTwo");
-        motorThree = this.hwMap.get(DcMotorEx.class, "motorThree");
-        motorFour = this.hwMap.get(DcMotorEx.class, "motorFour");
+        motorOne = this.hwMap.get(DcMotor.class, "motorOne");
+        motorTwo = this.hwMap.get(DcMotor.class, "motorTwo");
+        motorThree = this.hwMap.get(DcMotor.class, "motorThree");
+        motorFour = this.hwMap.get(DcMotor.class, "motorFour");
         liftMotor = this.hwMap.dcMotor.get("liftMotor");
         liftMotor2 = this.hwMap.dcMotor.get("liftMotor2");
         handMotor = this.hwMap.dcMotor.get("handMotor");

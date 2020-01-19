@@ -153,11 +153,11 @@ public class Dobby {
             Log.d("Spleepy time", "Sleep failed");
         }
 
-        driveTrain.goBackward(31);
+        driveTrain.goBackward(28);
         driveTrain.turn(90);
         driveTrain.goForward(12);
         baseMover.raiseMotors();
-        driveTrain.goBackward(24);
+        driveTrain.goBackward(30);
         baseMover.lowerMotors();
     }
 

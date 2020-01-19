@@ -43,6 +43,12 @@ public class BaseMover {
         this.telemetry.update();
         if  (this.opMode.opModeIsActive()) {
             this.robot.bHSupport.setPosition((0.1));
+            try {
+                Thread.sleep(500);
+            }
+            catch(InterruptedException e){
+                Log.d("Spleepy time", "Sleep failed");
+            }
             this.robot.baseServoLeft.setPosition(0.2);
             while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
                 this.robot.baseMover.setPower(-0.5);
@@ -55,6 +61,12 @@ public class BaseMover {
     public void lowerMotors() {
         if  (this.opMode.opModeIsActive()) {
             this.robot.baseServoLeft.setPosition(motorsDown);
+            try {
+                Thread.sleep(500);
+            }
+            catch(InterruptedException e){
+                Log.d("Spleepy time", "Sleep failed");
+            }
             this.robot.bHSupport.setPosition(motorsDown);
             while (this.opMode.opModeIsActive() && this.robot.baseMover.getCurrentPosition() > 0) {
                 this.robot.baseMover.setPower(0.5);
@@ -73,39 +85,16 @@ public class BaseMover {
         this.telemetry.addData("base holder pos", this.robot.baseServoLeft.getPosition());
         this.telemetry.update();
 
-        if (gamepad1.y ) {
-            this.telemetry.addData("Base Motor Worm Status",this.robot.baseMover.getCurrentPosition());
-            this.robot.baseMover.setPower(-0.8);
-            isGoingUp = true;
-            this.robot.baseServoLeft.setPosition(0.2);
-            this.robot.bHSupport.setPosition(0.1);
+        if (gamepad1.y) {
+            this.raiseMotors();
         }
         if (gamepad1.a/* && this.robot.baseMover.getCurrentPosition() > -1*/) {
             Log.d("BaseMotorWorm Status","" + this.robot.baseMover.getCurrentPosition());
-            this.telemetry.update();
-            this.robot.baseMover.setPower(.8);
-            isGoingUp = false;
-            this.robot.baseServoLeft.setPosition(motorsDown);
-            //this.robot.baseServoRight.setPosition(motorsDown);
+            this.lowerMotors();
         }
 
         // Moves worm gear w/o limits
 
-
-        if((!gamepad1.y && !gamepad1.a) || this.robot.baseMover.getCurrentPosition() < 0){
-            this.robot.baseMover.setPower(0);
-        }
-
-        if(!isGoingUp){
-            if(this.robot.baseServoLeft.getPosition() > 0.8){
-                this.robot.bHSupport.setPosition(motorsDown);
-            }
-        }
-        if(isGoingUp){
-            if(this.robot.bHSupport.getPosition() < 0.3){
-                this.robot.baseServoLeft.setPosition(baseServoStart);
-            }
-        }
 
 
     }
