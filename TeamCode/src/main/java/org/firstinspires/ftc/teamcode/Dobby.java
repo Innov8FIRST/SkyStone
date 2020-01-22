@@ -133,13 +133,37 @@ public class Dobby {
         driveTrain.goForward(12); // assuming robot is 18" long
     }
     public void straightRight(){
-        driveTrain.goForward(24);
-        driveTrain.turn(-95);
+        driveTrain.goForward(15);
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.turn(-68);
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
         driveTrain.goForward((30));
     }
     public void straightLeft(){
-        driveTrain.goForward(24);
-        driveTrain.turn(95);
+        driveTrain.goForward(15);
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.turn(68);
+        try {
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
         driveTrain.goForward((30));
     }
 
@@ -157,6 +181,8 @@ public class Dobby {
         driveTrain.turn(90);
         driveTrain.goForward(12);
         baseMover.raiseMotors();
+        driveTrain.goLeft(21);
+        driveTrain.goRight(2);
         driveTrain.goBackward(30);
         baseMover.lowerMotors();
     }
@@ -175,6 +201,8 @@ public class Dobby {
         driveTrain.turn(-90);
         driveTrain.goForward(12);
         baseMover.raiseMotors();
+        driveTrain.goRight(21);
+        driveTrain.goLeft(2);
         driveTrain.goBackward(30);
         baseMover.lowerMotors();
     }

@@ -147,7 +147,7 @@ public class DriveTrain {
      * @param degreesToTurn Number of degrees to turn. If negative, turns right. If positive, turns left.
      */
     public void turn(double degreesToTurn) {
-        double turnCorrector = 0.725;
+        double turnCorrector = 1;
         degreesToTurn = degreesToTurn * turnCorrector;
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -161,7 +161,7 @@ public class DriveTrain {
                 telemetry.addData("angles", angles.firstAngle);
                 telemetry.addData("degreesToTurn", degreesToTurn);
                 telemetry.update();
-                Log.d("Turning", "angles: " + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
+                Log.d("Turning", "angles 164: "  + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
             }
         } else {
             while ((angles.firstAngle < degreesToTurn) && this.opMode.opModeIsActive()) {
@@ -173,7 +173,7 @@ public class DriveTrain {
                 telemetry.addData("angles", angles.firstAngle);
                 telemetry.addData("degreesToTurn", degreesToTurn);
                 telemetry.update();
-                Log.d("Turning", "angles: " + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
+                Log.d("Turning", "angles 176: " + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
             }
         }
         this.stop();
@@ -184,11 +184,10 @@ public class DriveTrain {
 
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition - (inches * sideInchToTick); // How far you need to travel
-        while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
-            Log.d("Dobby", "End Position: " + endPosition);
-            Log.d("Dobby", "Start Pos: " + startPosition);
-            Log.d("Dobby", "Current Pos: " + this.robot.motorOne.getCurrentPosition());
-
+        while (this.robot.motorOne.getCurrentPosition() > endPosition && this.opMode.opModeIsActive()) {
+            Log.d("going Left", "End Position: " + endPosition);
+            Log.d("going Left", "Start Pos: " + startPosition);
+            Log.d("going Left", "Current Pos: " + this.robot.motorOne.getCurrentPosition());
 
             this.robot.motorOne.setPower(-wheelOnePower);
             this.robot.motorTwo.setPower(wheelTwoPower);

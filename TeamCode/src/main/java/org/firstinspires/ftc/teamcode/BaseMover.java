@@ -26,16 +26,11 @@ public class BaseMover {
         this.robot = robot;
         this.telemetry = telemetry;
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
-        this.telemetry.addData("base motor current pos.", this.robot.baseMover.getCurrentPosition());
         this.telemetry.update();
-        while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
-            this.robot.baseMover.setPower(-0.5);
-            this.telemetry.addData("base motor current pos.", this.robot.baseMover.getCurrentPosition());
-            this.telemetry.update();
-        }
-        this.robot.baseMover.setPower(0);
         this.robot.baseServoLeft.setPosition(startServo);
         this.robot.bHSupport.setPosition((0.1));
+        this.robot.bHSupportRight.setPosition(0.75);
+        this.robot.baseServoRight.setPosition(0.1);
     }
 
     public void raiseMotors() {
@@ -43,6 +38,7 @@ public class BaseMover {
         this.telemetry.update();
         if  (this.opMode.opModeIsActive()) {
             this.robot.bHSupport.setPosition((0.1));
+            this.robot.bHSupportRight.setPosition(0.75);
             try {
                 Thread.sleep(500);
             }
@@ -50,10 +46,8 @@ public class BaseMover {
                 Log.d("Spleepy time", "Sleep failed");
             }
             this.robot.baseServoLeft.setPosition(0.2);
-            while (!this.robot.neville.isPressed() && this.robot.baseMover.getCurrentPosition() < endPosition) {
-                this.robot.baseMover.setPower(-0.5);
-            }
-            this.robot.baseMover.setPower(0);
+            this.robot.baseServoRight.setPosition(0.1);
+
         }
 
     }
@@ -61,6 +55,7 @@ public class BaseMover {
     public void lowerMotors() {
         if  (this.opMode.opModeIsActive()) {
             this.robot.baseServoLeft.setPosition(motorsDown);
+            this.robot.baseServoRight.setPosition(0.8);
             try {
                 Thread.sleep(500);
             }
@@ -68,15 +63,13 @@ public class BaseMover {
                 Log.d("Spleepy time", "Sleep failed");
             }
             this.robot.bHSupport.setPosition(motorsDown);
-            while (this.opMode.opModeIsActive() && this.robot.baseMover.getCurrentPosition() > 0) {
-                this.robot.baseMover.setPower(0.5);
-            }
-            this.robot.baseMover.setPower(0);
+            this.robot.bHSupportRight.setPosition(0);
         }
-
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.update();
     }
+
+
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
 
         this.telemetry.addData(BASE_MOVER_CAPTION, "gamepad updated");
@@ -89,7 +82,6 @@ public class BaseMover {
             this.raiseMotors();
         }
         if (gamepad1.a/* && this.robot.baseMover.getCurrentPosition() > -1*/) {
-            Log.d("BaseMotorWorm Status","" + this.robot.baseMover.getCurrentPosition());
             this.lowerMotors();
         }
 

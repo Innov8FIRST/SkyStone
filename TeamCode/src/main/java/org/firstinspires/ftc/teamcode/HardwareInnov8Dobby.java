@@ -32,14 +32,15 @@ public class HardwareInnov8Dobby {
     public DcMotor liftMotor = null; // Lift
     public DcMotor liftMotor2 = null; //other Lift motor
     public DcMotor handMotor = null;
-    public DcMotor baseMover = null;
 
 
     // Example for servos
 
     //    public Servo    handServo      = null;
-    public Servo baseServoLeft = null;
+    public Servo baseServoLeft = null;   // actually the right
     public Servo bHSupport = null;
+    public Servo baseServoRight = null;
+    public Servo bHSupportRight = null;
     public Servo ginny = null;
     public CRServo rapServoLeft = null;
     public CRServo rapServoRight = null;
@@ -84,7 +85,6 @@ public class HardwareInnov8Dobby {
         liftMotor = this.hwMap.dcMotor.get("liftMotor");
         liftMotor2 = this.hwMap.dcMotor.get("liftMotor2");
         handMotor = this.hwMap.dcMotor.get("handMotor");
-        baseMover = this.hwMap.dcMotor.get("baseMover");
         motorOne.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         motorTwo.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         motorThree.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
@@ -92,7 +92,6 @@ public class HardwareInnov8Dobby {
         liftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         liftMotor2.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         handMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        baseMover.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
 
 //        //leftSensor = this.hwMap.colorSensor.get("leftSensor");
         dumbledore = this.hwMap.colorSensor.get("dumbledore");
@@ -113,7 +112,6 @@ public class HardwareInnov8Dobby {
         liftMotor.setPower(0);
         liftMotor2.setPower(0);
         handMotor.setPower(0);
-        baseMover.setPower(0);
 
 
         // Set all motors to run without encoders.
@@ -126,7 +124,6 @@ public class HardwareInnov8Dobby {
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         handMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        baseMover.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         // Define and initialize ALL installed servos.
@@ -135,9 +132,13 @@ public class HardwareInnov8Dobby {
         //handServo = hwMap.servo.get("handServo");
         //handServo.setPosition(END_SERVO);
         baseServoLeft = hwMap.servo.get("baseServoLeft");
-        baseServoLeft.setPosition(0.2);
+        baseServoLeft.setPosition(0);
         bHSupport = hwMap.servo.get("bHSupport");
         bHSupport.setPosition(0.1);
+        baseServoRight = hwMap.servo.get("baseServoRight");
+        baseServoRight.setPosition(0.1);
+        bHSupportRight = hwMap.servo.get("bHSupportRight");
+        bHSupportRight.setPosition(0.75);
         ginny = hwMap.servo.get("ginny");
         ginny.setPosition(0.6);
         rapServoLeft = hwMap.crservo.get("rapServoLeft");
