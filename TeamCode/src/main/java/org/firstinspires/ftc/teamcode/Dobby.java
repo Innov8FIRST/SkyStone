@@ -168,6 +168,7 @@ public class Dobby {
     }
 
     public void blueBaseOnly() {
+        driveTrain.goLeft(12);
         driveTrain.goForward(34);
         baseMover.lowerMotors();
         try {
@@ -177,7 +178,7 @@ public class Dobby {
             Log.d("Spleepy time", "Sleep failed");
         }
 
-        driveTrain.goBackward(28);
+        driveTrain.goBackward(24);
         driveTrain.turn(90);
         driveTrain.goForward(12);
         baseMover.raiseMotors();
@@ -186,9 +187,8 @@ public class Dobby {
         driveTrain.goBackward(30);
         baseMover.lowerMotors();
     }
-
     public void redBaseOnly() {
-        driveTrain.goForward(39);
+        driveTrain.goForward(35    );
         baseMover.lowerMotors();
         try {
             Thread.sleep(1500);
@@ -196,17 +196,82 @@ public class Dobby {
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
         }
-
         driveTrain.goBackward(31);
         driveTrain.turn(-90);
         driveTrain.goForward(12);
         baseMover.raiseMotors();
-        driveTrain.goRight(21);
+        driveTrain.goRight(26);
         driveTrain.goLeft(2);
         driveTrain.goBackward(30);
         baseMover.lowerMotors();
     }
-
+    public void blueBaseTest() {
+        driveTrain.goLeft(15);
+        try {
+            Thread.sleep(500);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.goForward(30);
+        try {
+            Thread.sleep(500);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        baseMover.lowerMotors();
+        try {
+            Thread.sleep(1500);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.turn(10);
+        driveTrain.goBackward(36);
+        driveTrain.turn(60);
+        driveTrain.goForward(19);
+        baseMover.raiseMotors();
+        driveTrain.goLeft(30);
+        driveTrain.goRight(2);
+//        try {
+//            Thread.sleep(11000);
+//        }
+//        catch(InterruptedException e){
+//            Log.d("Spleepy time", "Sleep failed");
+//        }
+        driveTrain.goBackward(28);
+//        driveTrain.turn(90);
+//        this.straightLeft();
+        baseMover.lowerMotors();
+    }
+    public void redBaseTest() {
+        driveTrain.goForward(35);
+        baseMover.lowerMotors();
+        try {
+            Thread.sleep(1500);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.turn(-15);
+        driveTrain.goBackward(31);
+        driveTrain.turn(-75);
+        driveTrain.goForward(12);
+        baseMover.raiseMotors();
+        driveTrain.goRight(26);
+        driveTrain.goLeft(2);
+        try {
+            Thread.sleep(11000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.goBackward(20);
+        driveTrain.turn(90);
+        this.straightLeft();
+        baseMover.lowerMotors();
+    }
     public void useVuforia() {
         while (this.opMode.opModeIsActive()) {
             telemetry.addData("Is Skystone", vuforia.isSkystone());

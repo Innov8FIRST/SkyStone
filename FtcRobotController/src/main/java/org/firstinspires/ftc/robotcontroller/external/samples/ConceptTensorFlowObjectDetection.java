@@ -69,7 +69,7 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            "AQ1M9Hr/////AAAAGWU4/VA9CkB2qgx3FSD3/fw7bv2rFbgag0jODlm8OJlj9coE/2ldwiRYwteK6A0INCjLtDrsBB5m+hphfYZjNLTb6BU7+9qGCnprf45lWm/bnlvIyB7dptTblbZ2K1Se8LSTKNhIXpA5r9cThAjUkg8PbiUfG7Qj5fD5lq3w+q+RHnIyNv2l6RjqlhHw5IF2aGQxEFmsPPa8YDjTDSGF0CFEWokxNTSe55H3etnQVysmx7mTUws0VZu7rnSgeN26RRZg91PB5xmEHi/zS7KVjLKDgktZenAht5kLHpvs2bWrHDcu6Yk+dP4I2YfPgd6gTYhxeY9Ge5rUXkufQ3y3XIffUSbhjWMRdTVNolB7/WAZ";
+            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
@@ -83,7 +83,7 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
      */
     private TFObjectDetector tfod;
 
-    //@Override
+    @Override
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.

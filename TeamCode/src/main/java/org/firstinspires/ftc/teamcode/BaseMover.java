@@ -27,18 +27,18 @@ public class BaseMover {
         this.telemetry = telemetry;
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
-        this.robot.baseServoLeft.setPosition(startServo);
-        this.robot.bHSupport.setPosition((0.1));
-        this.robot.bHSupportRight.setPosition(0.75);
-        this.robot.baseServoRight.setPosition(0.1);
+//        this.robot.baseServoLeft.setPosition(startServo);
+//        this.robot.bHSupport.setPosition((0.1));
+//       this.robot.bHSupportRight.setPosition(1);
+//        this.robot.baseServoRight.setPosition(0.1);
     }
 
     public void raiseMotors() {
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
         if  (this.opMode.opModeIsActive()) {
-            this.robot.bHSupport.setPosition((0.1));
-            this.robot.bHSupportRight.setPosition(0.75);
+            this.robot.bHSupport.setPosition((0.0));
+            this.robot.bHSupportRight.setPosition(1);
             try {
                 Thread.sleep(500);
             }
@@ -55,15 +55,15 @@ public class BaseMover {
     public void lowerMotors() {
         if  (this.opMode.opModeIsActive()) {
             this.robot.baseServoLeft.setPosition(motorsDown);
-            this.robot.baseServoRight.setPosition(0.8);
+            this.robot.baseServoRight.setPosition(1);
             try {
                 Thread.sleep(500);
             }
             catch(InterruptedException e){
                 Log.d("Spleepy time", "Sleep failed");
             }
-            this.robot.bHSupport.setPosition(motorsDown);
-            this.robot.bHSupportRight.setPosition(0);
+            this.robot.bHSupport.setPosition(1);
+            this.robot.bHSupportRight.setPosition(0.1);
         }
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.update();
