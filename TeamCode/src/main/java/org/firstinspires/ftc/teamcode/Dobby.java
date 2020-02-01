@@ -67,17 +67,18 @@ public class Dobby {
         int blockNum = 1;
         baseMover.lowerMotors();
         driveTrain.goForward(27.00); // assuming robot is 18" long & camera is on front of robot
+        Log.d("auto status", "now extending rap");
+        pickup.rapOut(3700);
         this.telemetry.addData("auto status", "now entering while loop");
         this.telemetry.addData("Red value", this.robot.dumbledore.red());
         this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
         this.telemetry.addData("Green value", this.robot.dumbledore.green());
-        this.telemetry.update();
         this.telemetry.addData("Block Number is", blockNum);
         this.telemetry.update();
-        while (this.opMode.opModeIsActive() && blockNum <= 3 &&
-                (this.robot.dumbledore.red() > 20 || this.robot.dumbledore.blue() > 20 || this.robot.dumbledore.green() > 20)) {
-            this.telemetry.addData("auto status", "now in the while loop");
-            this.telemetry.addData("Block Number is", blockNum);
+        while (this.opMode.opModeIsActive() && blockNum < 3 &&
+                (this.robot.dumbledore.red() > 10 || this.robot.dumbledore.blue() > 10 || this.robot.dumbledore.green() > 10)) {
+            Log.d("auto status", "now in the while loop");
+            Log.d("Block Number is", "" + blockNum);
             this.telemetry.addData("Red value", this.robot.dumbledore.red());
             this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
             this.telemetry.addData("Green value", this.robot.dumbledore.green());
@@ -85,11 +86,11 @@ public class Dobby {
             driveTrain.goRight(8.0);
             blockNum++;
         }
+        Log.d("auto status", "now going left");
         driveTrain.goLeft(6);
-        Log.d("auto status", "now extending rap");
-        pickup.rapOut(2000);
         Log.d("auto status", "now opening hand");
         pickup.handOpen();
+        Log.d("auto status", "now going forward");
         driveTrain.goForward(6);
         Log.d("auto status", "now closing hand");
         pickup.handClose();
@@ -98,6 +99,7 @@ public class Dobby {
         driveTrain.goBackward(12);
         Log.d("auto status", "now turning");
         driveTrain.turn(90);
+        Log.d("auto status", "now setting hand power to 0");
         this.robot.handMotor.setPower(0);
         Log.d("auto status", "now going forward");
         driveTrain.goForward(60.0 + blockNum * 8); // should end up in "building zone"
@@ -168,44 +170,6 @@ public class Dobby {
     }
 
     public void blueBaseOnly() {
-        driveTrain.goLeft(12);
-        driveTrain.goForward(34);
-        baseMover.lowerMotors();
-        try {
-            Thread.sleep(1500);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
-
-        driveTrain.goBackward(24);
-        driveTrain.turn(90);
-        driveTrain.goForward(12);
-        baseMover.raiseMotors();
-        driveTrain.goLeft(21);
-        driveTrain.goRight(2);
-        driveTrain.goBackward(30);
-        baseMover.lowerMotors();
-    }
-    public void redBaseOnly() {
-        driveTrain.goForward(35    );
-        baseMover.lowerMotors();
-        try {
-            Thread.sleep(1500);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
-        driveTrain.goBackward(31);
-        driveTrain.turn(-90);
-        driveTrain.goForward(12);
-        baseMover.raiseMotors();
-        driveTrain.goRight(26);
-        driveTrain.goLeft(2);
-        driveTrain.goBackward(30);
-        baseMover.lowerMotors();
-    }
-    public void blueBaseTest() {
         driveTrain.goLeft(15);
         try {
             Thread.sleep(500);
@@ -245,6 +209,25 @@ public class Dobby {
 //        this.straightLeft();
         baseMover.lowerMotors();
     }
+    public void redBaseOnly() {
+        driveTrain.goForward(35    );
+        baseMover.lowerMotors();
+        try {
+            Thread.sleep(1500);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.goBackward(31);
+        driveTrain.turn(-90);
+        driveTrain.goForward(12);
+        baseMover.raiseMotors();
+        driveTrain.goRight(26);
+        driveTrain.goLeft(2);
+        driveTrain.goBackward(30);
+        baseMover.lowerMotors();
+    }
+
     public void redBaseTest() {
         driveTrain.goForward(35);
         baseMover.lowerMotors();

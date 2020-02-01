@@ -9,7 +9,7 @@ public class RedBaseTester_Dobby extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
         Dobby dobby = new Dobby(telemetry, hardwareMap, this);
         waitForStart();
-        dobby.blueBaseTest();
+        dobby.redBaseTest();
 
     }
 }

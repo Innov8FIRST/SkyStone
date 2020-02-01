@@ -79,8 +79,46 @@ public class DriveTrain {
             Log.d("wheel two power", "" + this.robot.motorTwo.getPower());
             Log.d("wheel three power", "" + this.robot.motorThree.getPower());
             Log.d("wheel four power", "" + this.robot.motorFour.getPower());
+            Log.d("CurrentPosition", "" + this.robot.motorOne.getCurrentPosition());
+
             this.telemetry.update();
         }
+        this.stop();
+        this.telemetry.update();
+    }
+
+    public void ForwardAndRapOut(double inches){
+        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
+        this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
+        this.telemetry.update();
+        startPosition = this.robot.motorOne.getCurrentPosition();
+        endPosition = startPosition + (inches * inchToTick); // How far you need to travel
+        while (this.robot.motorOne.getCurrentPosition() < endPosition && this.opMode.opModeIsActive()) {
+            if(this.robot.motorOne.getCurrentPosition() < startPosition + 750){
+                this.robot.rapServoLeft.setPower(-1);
+                this.robot.rapServoRight.setPower(1);
+            }
+            else{
+                this.robot.rapServoLeft.setPower(0);
+                this.robot.rapServoRight.setPower(0);
+            }
+            this.telemetry.addData("StartPosition", startPosition);
+            this.telemetry.addData("EndPosition", endPosition);
+            this.telemetry.addData("CurrentPosition", this.robot.motorOne.getCurrentPosition());
+            this.robot.motorOne.setPower(wheelOnePower);
+            this.robot.motorTwo.setPower(wheelTwoPower);
+            this.robot.motorThree.setPower((wheelThreePower));
+            this.robot.motorFour.setPower(wheelFourPower);
+            Log.d("wheel one power", "" + this.robot.motorOne.getPower());
+            Log.d("wheel two power", "" + this.robot.motorTwo.getPower());
+            Log.d("wheel three power", "" + this.robot.motorThree.getPower());
+            Log.d("wheel four power", "" + this.robot.motorFour.getPower());
+            Log.d("CurrentPosition", "" + this.robot.motorOne.getCurrentPosition());
+
+            this.telemetry.update();
+        }
+        this.robot.rapServoLeft.setPower(0);
+        this.robot.rapServoRight.setPower(0);
         this.stop();
         this.telemetry.update();
     }

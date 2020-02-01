@@ -66,7 +66,9 @@ public class Pickup {
     public void handOpen() {
         this.telemetry.addData("Hand status: ", "Hand is opening");
         int endPosition = -511;
+        Log.d("hand motor end pos", ""+endPosition);
         while(this.robot.handMotor.getCurrentPosition() > endPosition && this.opMode.opModeIsActive()){
+            Log.d("hand motor position", "" + this.robot.handMotor.getCurrentPosition());
             this.robot.handMotor.setPower(0.4);
         }
         this.robot.handMotor.setPower(0);
@@ -74,8 +76,6 @@ public class Pickup {
 
     public void handClose() {
         this.telemetry.addData("Hand status: ", "Hand is opening");
-        int pastEncoder = this.robot.handMotor.getCurrentPosition();
-        int currentEncoder;
         this.robot.handMotor.setPower(0.2);
 //        while(pastEncoder != this.robot.handMotor.getCurrentPosition() && this.opMode.opModeIsActive()){
 //            currentEncoder = this.robot.handMotor.getCurrentPosition();
