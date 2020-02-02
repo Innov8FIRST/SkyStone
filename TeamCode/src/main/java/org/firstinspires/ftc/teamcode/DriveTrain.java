@@ -122,6 +122,7 @@ public class DriveTrain {
         this.robot.rapServoLeft.setPower(0);
         this.robot.rapServoRight.setPower(0);
         this.telemetry.update();
+
     }
 
     public void goBackward(double inches) {

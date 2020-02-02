@@ -29,10 +29,8 @@ public class Pickup {
         }
         this.robot.rapServoLeft.setPower(0);
         this.robot.rapServoRight.setPower(0);
-        this.telemetry.addData("rapServoLeft: ", 1);
-        this.telemetry.addData("rapServoRight: ", -1);
-        this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoLeft.getPower());
-        this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoRight.getPower());
+        Log.d("Rack and Pinion: ", "" + this.robot.rapServoLeft.getPower());
+        Log.d("Rack and Pinion: ", "" + this.robot.rapServoRight.getPower());
         this.telemetry.update();
         this.telemetry.update();
         //moves rack and pinion out
@@ -67,16 +65,27 @@ public class Pickup {
     }
 
     public void handClose() {
-        this.telemetry.addData("Hand status: ", "Hand is opening");
-        this.robot.handMotor.setPower(0.2);
-//        while(pastEncoder != this.robot.handMotor.getCurrentPosition() && this.opMode.opModeIsActive()){
-//            currentEncoder = this.robot.handMotor.getCurrentPosition();
-//            this.robot.handMotor.setPower((0.2));
-//            this.telemetry.addData("Past encoder value", pastEncoder);
-//            this.telemetry.addData("current hand pos.", this.robot.handMotor.getCurrentPosition());
-//            this.telemetry.update();
-//            pastEncoder = currentEncoder;
-//        }
+        this.telemetry.addData("Hand status: ", "Hand is closing");
+        int pastEncoder = this.robot.handMotor.getCurrentPosition();
+        try {
+            Thread.sleep(20);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        while(this.robot.handMotor.getCurrentPosition() - pastEncoder > 2){
+            Log.d("hand current position", "" + this.robot.handMotor.getCurrentPosition());
+            this.robot.handMotor.setPower(0.4);
+            pastEncoder = this.robot.handMotor.getCurrentPosition();
+            Log.d("hand past encoder", "" + pastEncoder);
+            try {
+                Thread.sleep(20);
+            }
+            catch(InterruptedException e){
+                Log.d("Spleepy time", "Sleep failed");
+            }
+        }
+
     }
 
     public void ginnyDrop () {
@@ -89,8 +98,15 @@ public class Pickup {
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
         this.telemetry.addData("pickupStatus", "Teleop update called");
         this.telemetry.update();
-        this.robot.rapServoLeft.setPower(gamepad2.right_stick_y);
-        this.robot.rapServoRight.setPower(-gamepad2.right_stick_y);
+        boolean isGoingOut = gamepad1.right_stick_y > 0;
+        if(isGoingOut && this.robot.neville.isPressed()){
+            this.robot.rapServoLeft.setPower(0);
+            this.robot.rapServoRight.setPower(0);
+        }
+        else{
+            this.robot.rapServoLeft.setPower(gamepad2.right_stick_y);
+            this.robot.rapServoRight.setPower(-gamepad2.right_stick_y);
+        }
         Log.d("hand motor pos.", "" + this.robot.handMotor.getCurrentPosition());
         if (gamepad2.right_bumper) {
             this.robot.handMotor.setPower(.5);

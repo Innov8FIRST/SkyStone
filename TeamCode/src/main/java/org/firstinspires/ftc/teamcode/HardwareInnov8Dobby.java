@@ -140,7 +140,7 @@ public class HardwareInnov8Dobby {
         bHSupportRight = hwMap.servo.get("bHSupportRight");
         bHSupportRight.setPosition(1);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
