@@ -66,9 +66,7 @@ public class Dobby {
         this.telemetry.addData(DOBBY_CAPTION, "Dobby is doing the autonomous");
         int blockNum = 1;
         baseMover.lowerMotors();
-        driveTrain.goForward(27.00); // assuming robot is 18" long & camera is on front of robot
-        Log.d("auto status", "now extending rap");
-        pickup.rapOut(3700);
+        driveTrain.forwardAndRapOut(18);
         this.telemetry.addData("auto status", "now entering while loop");
         this.telemetry.addData("Red value", this.robot.dumbledore.red());
         this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
@@ -95,7 +93,13 @@ public class Dobby {
         Log.d("auto status", "now closing hand");
         pickup.handClose();
         Log.d("auto status", "now lifting");
-        lift.moveUp(0.25);
+        lift.moveUp(0.5);
+        try {
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
         driveTrain.goBackward(12);
         Log.d("auto status", "now turning");
         driveTrain.turn(90);

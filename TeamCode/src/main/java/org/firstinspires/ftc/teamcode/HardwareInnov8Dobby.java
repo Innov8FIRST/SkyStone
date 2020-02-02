@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.util.Log;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -132,13 +134,19 @@ public class HardwareInnov8Dobby {
         //handServo = hwMap.servo.get("handServo");
         //handServo.setPosition(END_SERVO);
         baseServoLeft = hwMap.servo.get("baseServoLeft");
-        baseServoLeft.setPosition(0);
+        baseServoLeft.setPosition(0.1);
         bHSupport = hwMap.servo.get("bHSupport");
-        bHSupport.setPosition(0.1);
-        baseServoRight = hwMap.servo.get("baseServoRight");
-        baseServoRight.setPosition(0.1);
+        bHSupport.setPosition(0.2);
         bHSupportRight = hwMap.servo.get("bHSupportRight");
         bHSupportRight.setPosition(1);
+        try {
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        baseServoRight = hwMap.servo.get("baseServoRight");
+        baseServoRight.setPosition(0.1);
         ginny = hwMap.servo.get("ginny");
         ginny.setPosition(0.6);
         rapServoLeft = hwMap.crservo.get("rapServoLeft");

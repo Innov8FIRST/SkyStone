@@ -21,44 +21,36 @@ public class Pickup {
         telemetry.update();
     }
 
-    public void rapOut(long milliSecs) {
+    public void rapOut() {
         this.telemetry.addData("Rack and Pinion: ", "RAP is moving out");
-        this.robot.rapServoLeft.setPower(-1);
-        this.robot.rapServoRight.setPower(1);
-        this.telemetry.addData("rapServoLeft: ", -1);
-        this.telemetry.addData("rapServoRight: ", 1);
-        this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoLeft.getPower());
-        this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoRight.getPower());
-        this.telemetry.update();
-        try {
-            Thread.sleep(milliSecs);
-        }
-        catch(InterruptedException e){
-            Log.e("Sleep", "is broken", e);
+        while(!this.robot.neville.isPressed()) {
+            this.robot.rapServoLeft.setPower(1);
+            this.robot.rapServoRight.setPower(-1);
         }
         this.robot.rapServoLeft.setPower(0);
         this.robot.rapServoRight.setPower(0);
+        this.telemetry.addData("rapServoLeft: ", 1);
+        this.telemetry.addData("rapServoRight: ", -1);
+        this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoLeft.getPower());
+        this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoRight.getPower());
+        this.telemetry.update();
         this.telemetry.update();
         //moves rack and pinion out
     }
 
-    public void rapIn(long milliSecs) {
+    public void rapIn() {
         this.telemetry.addData("Rack and Pinion: ", "RAP is moving out");
-        this.robot.rapServoLeft.setPower(1);
-        this.robot.rapServoRight.setPower(-1);
+        while(!this.robot.neville.isPressed()){
+            this.robot.rapServoLeft.setPower(-1);
+            this.robot.rapServoRight.setPower(1);
+        }
+        this.robot.rapServoLeft.setPower(0);
+        this.robot.rapServoRight.setPower(0);
         this.telemetry.addData("rapServoLeft: ", -1);
         this.telemetry.addData("rapServoRight: ", 1);
         this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoLeft.getPower());
         this.telemetry.addData("Rack and Pinion: ", this.robot.rapServoRight.getPower());
         this.telemetry.update();
-        try {
-            Thread.sleep(milliSecs);
-        }
-        catch(InterruptedException e){
-            Log.e("Sleep", "is broken", e);
-        }
-        this.robot.rapServoLeft.setPower(0);
-        this.robot.rapServoRight.setPower(0);
         this.telemetry.update();
         //moves rack and pinion in
     }
@@ -69,7 +61,7 @@ public class Pickup {
         Log.d("hand motor end pos", ""+endPosition);
         while(this.robot.handMotor.getCurrentPosition() > endPosition && this.opMode.opModeIsActive()){
             Log.d("hand motor position", "" + this.robot.handMotor.getCurrentPosition());
-            this.robot.handMotor.setPower(0.4);
+            this.robot.handMotor.setPower(-0.4);
         }
         this.robot.handMotor.setPower(0);
     }
@@ -99,7 +91,7 @@ public class Pickup {
         this.telemetry.update();
         this.robot.rapServoLeft.setPower(gamepad2.right_stick_y);
         this.robot.rapServoRight.setPower(-gamepad2.right_stick_y);
-        this.telemetry.addData("hand motor pos.",this.robot.handMotor.getCurrentPosition());
+        Log.d("hand motor pos.", "" + this.robot.handMotor.getCurrentPosition());
         if (gamepad2.right_bumper) {
             this.robot.handMotor.setPower(.5);
         } else if (gamepad2.left_bumper) {
