@@ -62,7 +62,7 @@ public class BaseMover {
             catch(InterruptedException e){
                 Log.d("Spleepy time", "Sleep failed");
             }
-            this.robot.bHSupport.setPosition(.55);
+            this.robot.bHSupport.setPosition(.5);
             this.robot.bHSupportRight.setPosition(0.1);
         }
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");

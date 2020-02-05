@@ -92,18 +92,18 @@ public class Dobby {
         Log.d("auto status", "now opening hand");
         pickup.handOpen();
         Log.d("auto status", "now going forward");
-        driveTrain.goForward(6);
+        driveTrain.goForward(8);
         Log.d("auto status", "now closing hand");
         pickup.handClose();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(2500);
         }
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
         }
         driveTrain.goBackward(12);
         Log.d("auto status", "now turning");
-        driveTrain.turn(75);
+        driveTrain.turn(55);
         Log.d("auto status", "now setting hand power to 0");
         this.robot.handMotor.setPower(0);
         Log.d("auto status", "now going forward");
@@ -335,7 +335,6 @@ public class Dobby {
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
         }
-        driveTrain.goRight(9);
 //        driveTrain.goRight(26);
 //        driveTrain.goLeft(4);
         driveTrain.goBackward(40);
