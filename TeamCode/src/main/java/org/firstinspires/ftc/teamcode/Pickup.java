@@ -66,26 +66,26 @@ public class Pickup {
 
     public void handClose() {
         this.telemetry.addData("Hand status: ", "Hand is closing");
-        int pastEncoder = this.robot.handMotor.getCurrentPosition();
-        try {
-            Thread.sleep(20);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
-        while(this.robot.handMotor.getCurrentPosition() - pastEncoder > 2){
-            Log.d("hand current position", "" + this.robot.handMotor.getCurrentPosition());
-            this.robot.handMotor.setPower(0.4);
-            pastEncoder = this.robot.handMotor.getCurrentPosition();
-            Log.d("hand past encoder", "" + pastEncoder);
-            try {
-                Thread.sleep(20);
-            }
-            catch(InterruptedException e){
-                Log.d("Spleepy time", "Sleep failed");
-            }
-        }
-
+//        int pastEncoder = this.robot.handMotor.getCurrentPosition();
+//        try {
+//            Thread.sleep(20);
+//        }
+//        catch(InterruptedException e){
+//            Log.d("Spleepy time", "Sleep failed");
+//        }
+//        while(this.robot.handMotor.getCurrentPosition() - pastEncoder > 2){
+//            Log.d("hand current position", "" + this.robot.handMotor.getCurrentPosition());
+//            this.robot.handMotor.setPower(0.4);
+//            pastEncoder = this.robot.handMotor.getCurrentPosition();
+//            Log.d("hand past encoder", "" + pastEncoder);
+//            try {
+//                Thread.sleep(20);
+//            }
+//            catch(InterruptedException e){
+//                Log.d("Spleepy time", "Sleep failed");
+//            }
+//        }
+          this.robot.handMotor.setPower(0.2);
     }
 
     public void ginnyDrop () {

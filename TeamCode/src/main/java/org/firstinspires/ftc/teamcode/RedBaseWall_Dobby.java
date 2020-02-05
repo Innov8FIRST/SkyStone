@@ -3,14 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "BlueBaseOnly_Dobby", group = "Dobby")
-public class BlueBaseOnly_Dobby extends LinearOpMode
+@Autonomous(name = "RedBaseWall_Dobby", group = "Dobby")
+public class RedBaseWall_Dobby extends LinearOpMode
 {
     @Override
     public void runOpMode() throws InterruptedException {
         Dobby dobby = new Dobby(telemetry, hardwareMap, this);
         waitForStart();
-        dobby.blueBaseOnly();
+        dobby.redBaseWall();
 
     }
 }
