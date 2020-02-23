@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -44,6 +46,10 @@ public class Lift {
             this.telemetry.addData("encoder value is ", this.robot.liftMotor.getCurrentPosition());
             this.telemetry.addData("startLift = ", startLift);
             this.telemetry.addData("endLift = ", endLift);
+            Log.d(LIFT_CAPTION, "Going up?");
+            Log.d("encoder value is ", "" + this.robot.liftMotor.getCurrentPosition());
+            Log.d("startLift = ", "" + startLift);
+            Log.d("endLift = ", "" + endLift);
             this.telemetry.update();
         }
         this.stop();
@@ -61,6 +67,10 @@ public class Lift {
             this.telemetry.addData("startLift = ", startLift);
             this.telemetry.addData("endLift = ", endLift);
             this.telemetry.update();
+            this.telemetry.addData(LIFT_CAPTION, "Going down?");
+            this.telemetry.addData("encoder value is ", this.robot.liftMotor.getCurrentPosition());
+            this.telemetry.addData("startLift = ", startLift);
+            this.telemetry.addData("endLift = ", endLift);
         }
         this.stop();
         this.telemetry.addData(LIFT_CAPTION, "Lift is moving");
@@ -69,13 +79,14 @@ public class Lift {
 
     public void stop() {
         this.telemetry.addData(LIFT_CAPTION, "Lift is stopped");
+        Log.d(LIFT_CAPTION, "Lift is stopped");
         this.robot.liftMotor.setPower(0);
         this.telemetry.update();
     }
 
 
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
-
+        Log.d(LIFT_CAPTION, "lift teleop gamepad updated");
         this.telemetry.addData(LIFT_CAPTION, "gamepad updated");
         telemetry.addData("2_left_stick_y", gamepad1.left_stick_y);
         this.telemetry.addData(LIFT_CAPTION, this.robot.liftMotor.getCurrentPosition());

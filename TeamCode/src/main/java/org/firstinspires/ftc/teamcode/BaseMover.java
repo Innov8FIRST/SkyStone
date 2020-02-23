@@ -25,7 +25,6 @@ public class BaseMover {
         this.opMode = opMode;
         this.robot = robot;
         this.telemetry = telemetry;
-        this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
 //        this.robot.baseServoLeft.setPosition(startServo);
 //        this.robot.bHSupport.setPosition((0.1));
@@ -34,7 +33,7 @@ public class BaseMover {
     }
 
     public void raiseMotors() {
-        this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been raised");
+        Log.d(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
         if  (this.opMode.opModeIsActive()) {
             this.robot.bHSupport.setPosition((0.0));
@@ -65,13 +64,13 @@ public class BaseMover {
             this.robot.bHSupport.setPosition(.5);
             this.robot.bHSupportRight.setPosition(0.1);
         }
+        Log.d(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.update();
     }
 
 
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
-
         this.telemetry.addData(BASE_MOVER_CAPTION, "gamepad updated");
         this.telemetry.addData("Is moving up?", isGoingUp);
         this.telemetry.addData("base support pos", this.robot.bHSupport.getPosition());
@@ -79,9 +78,11 @@ public class BaseMover {
         this.telemetry.update();
 
         if (gamepad1.y) {
+            Log.d("teleop status", " raising basemovers");
             this.raiseMotors();
         }
         if (gamepad1.a/* && this.robot.baseMover.getCurrentPosition() > -1*/) {
+            Log.d("teleop status", "lower motors");
             this.lowerMotors();
         }
 

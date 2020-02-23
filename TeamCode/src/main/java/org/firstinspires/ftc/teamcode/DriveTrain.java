@@ -62,6 +62,7 @@ public class DriveTrain {
     }
 
     public void goForward(double inches) {
+        Log.d(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
         this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
         this.telemetry.update();
@@ -88,7 +89,8 @@ public class DriveTrain {
     }
 
     public void forwardAndRapOut(double inches){
-        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward");
+        Log.d(DRIVE_TRAIN_CAPTION, "Robot is moving forward and extending rap");
+        this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving forward and extending rap");
         this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
         this.telemetry.update();
         startPosition = this.robot.motorOne.getCurrentPosition();
@@ -126,6 +128,7 @@ public class DriveTrain {
     }
 
     public void goBackward(double inches) {
+        Log.d(DRIVE_TRAIN_CAPTION, "Robot is moving backwards");
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Robot is moving backwards");
         startPosition = this.robot.motorOne.getCurrentPosition();
         endPosition = startPosition - (inches * inchToTick); // How far you need to travel
@@ -134,6 +137,11 @@ public class DriveTrain {
             this.robot.motorTwo.setPower(-wheelTwoPower);
             this.robot.motorThree.setPower(-wheelThreePower);
             this.robot.motorFour.setPower(-wheelFourPower);
+            Log.d("wheel one power", "" + this.robot.motorOne.getPower());
+            Log.d("wheel two power", "" + this.robot.motorTwo.getPower());
+            Log.d("wheel three power", "" + this.robot.motorThree.getPower());
+            Log.d("wheel four power", "" + this.robot.motorFour.getPower());
+            Log.d("CurrentPosition", "" + this.robot.motorOne.getCurrentPosition());
         }
         this.stop();
         this.telemetry.update();
@@ -212,6 +220,7 @@ public class DriveTrain {
     }
 
     public void stop() {
+        Log.d(DRIVE_TRAIN_CAPTION, "Stopping the drive train");
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "Stopping the drive train");
         this.telemetry.addData("wheel power", this.robot.motorOne.getPower());
         this.telemetry.update();
@@ -230,8 +239,8 @@ public class DriveTrain {
         this.telemetry.update();
     }*/
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
+        Log.d(DRIVE_TRAIN_CAPTION, "turning teleop updated");
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "gamepad updated");
-
         telemetry.addData("1_left_stick_x", gamepad1.left_stick_x);
         telemetry.addData("1_left_stick_y", gamepad1.left_stick_y);
         telemetry.addData("1_right_stick_x", gamepad1.right_stick_x);

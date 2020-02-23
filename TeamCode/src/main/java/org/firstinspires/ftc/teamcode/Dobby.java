@@ -68,13 +68,11 @@ public class Dobby {
         baseMover.lowerMotors();
         Log.d("auto status", "extending rap and going forward");
         driveTrain.forwardAndRapOut(14);
-        Log.d("rap power", "" + this.robot.rapServoLeft.getPower());
-        Log.d("rap power", "" + this.robot.rapServoRight.getPower());
-        this.telemetry.addData("auto status", "now entering while loop");
-        this.telemetry.addData("Red value", this.robot.dumbledore.red());
-        this.telemetry.addData("Blue value", this.robot.dumbledore.blue());
-        this.telemetry.addData("Green value", this.robot.dumbledore.green());
-        this.telemetry.addData("Block Number is", blockNum);
+        Log.d("auto status", "now entering while loop");
+        Log.d("Red value", "" + this.robot.dumbledore.red());
+        Log.d("Blue value", "" + this.robot.dumbledore.blue());
+        Log.d("Green value", "" + this.robot.dumbledore.green());
+        Log.d("Block Number is", "" + blockNum);
         this.telemetry.update();
         while (this.opMode.opModeIsActive() && blockNum < 3 &&
                 (this.robot.dumbledore.red() > 10 || this.robot.dumbledore.blue() > 10 || this.robot.dumbledore.green() > 10)) {
@@ -101,6 +99,7 @@ public class Dobby {
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
         }
+        Log.d("auto status", "now going backward");
         driveTrain.goBackward(12);
         Log.d("auto status", "now turning");
         driveTrain.turn(55);
