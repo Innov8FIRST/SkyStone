@@ -148,7 +148,7 @@ public class DriveTrain {
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         if (degreesToTurn < 0) {
-            while ((angles.firstAngle > degreesToTurn) && this.opMode.opModeIsActive()) {
+            while ((angles.thirdAngle > degreesToTurn) && this.opMode.opModeIsActive()) {
                 this.robot.motorOne.setPower(wheelOnePower);
                 this.robot.motorTwo.setPower(wheelTwoPower);
                 this.robot.motorThree.setPower(-wheelThreePower);
@@ -160,7 +160,7 @@ public class DriveTrain {
                 Log.d("Turning", "angles 164: "  + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
             }
         } else {
-            while ((angles.firstAngle < degreesToTurn) && this.opMode.opModeIsActive()) {
+            while ((angles.thirdAngle < degreesToTurn) && this.opMode.opModeIsActive()) {
                 this.robot.motorOne.setPower(-wheelOnePower);
                 this.robot.motorTwo.setPower(-wheelTwoPower);
                 this.robot.motorThree.setPower(wheelThreePower);
