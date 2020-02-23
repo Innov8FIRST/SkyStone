@@ -247,7 +247,7 @@ public class DriveTrain {
         telemetry.addData("1_right_stick_y", gamepad1.right_stick_y);
 
 
-        if (Math.abs(gamepad1.left_stick_y) > 0.35 && this.opMode.opModeIsActive()) {
+        if (Math.abs(gamepad1.left_stick_y) >= Math.abs(gamepad1.left_stick_x) && Math.abs(gamepad1.left_stick_y) > 0.35 && this.opMode.opModeIsActive()) {
             double wheelPower = gamepad1.left_stick_y;
             this.robot.motorOne.setPower(-wheelPower * wheelOnePower);
             this.robot.motorTwo.setPower(-wheelPower * wheelTwoPower);
@@ -255,7 +255,7 @@ public class DriveTrain {
             this.robot.motorFour.setPower(-wheelPower * wheelFourPower);
 
         }
-        if (Math.abs(gamepad1.left_stick_x) > 0.6 && this.opMode.opModeIsActive()) {
+        if (Math.abs(gamepad1.left_stick_x) > 0.35 && Math.abs(gamepad1.left_stick_x) > Math.abs(gamepad1.left_stick_y) && this.opMode.opModeIsActive()) {
             //forward backward
             if (gamepad1.left_stick_x > 0) {
                 this.telemetry.addData(DRIVE_TRAIN_CAPTION, "robot is going right!");
@@ -282,6 +282,7 @@ public class DriveTrain {
                 this.robot.motorTwo.setPower(wheelPower * wheelTwoPower); // May need to turn other direction
                 this.robot.motorThree.setPower(-wheelPower * wheelThreePower);
                 this.robot.motorFour.setPower(-wheelPower * wheelFourPower);
+                Log.d("Turning", "angles 285: "  + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
             } else {
                 double wheelPower = Math.abs(gamepad1.right_stick_x);
                 this.telemetry.addData(DRIVE_TRAIN_CAPTION, "robot is turning left!");
@@ -289,6 +290,7 @@ public class DriveTrain {
                 this.robot.motorTwo.setPower(-wheelPower * wheelTwoPower); // May need to turn other direction
                 this.robot.motorThree.setPower(wheelPower * wheelThreePower);
                 this.robot.motorFour.setPower(wheelPower * wheelFourPower);
+                Log.d("Turning", "angles 293: "  + angles.firstAngle + ", " + angles.secondAngle + ", " + angles.thirdAngle);
             }
         }
 
