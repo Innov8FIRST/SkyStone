@@ -146,7 +146,7 @@ public class Dobby {
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
         }
-        driveTrain.turn(-68);
+        driveTrain.turn(-60);
         try {
             Thread.sleep(5000);
         }
@@ -236,12 +236,24 @@ public class Dobby {
         catch(InterruptedException e){
             Log.d("Spleepy time", "Sleep failed");
         }
-        driveTrain.turn(10);
-        driveTrain.goBackward(36);
+        driveTrain.turn(30);
+        try {
+            Thread.sleep(100);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
+        driveTrain.goBackward(12);
+        try {
+            Thread.sleep(100);
+        }
+        catch(InterruptedException e){
+            Log.d("Spleepy time", "Sleep failed");
+        }
         driveTrain.turn(60);
-        driveTrain.goForward(19);
+        driveTrain.goForward(50);
         baseMover.raiseMotors();
-        driveTrain.goLeft(30);
+        driveTrain.goLeft(65);
         driveTrain.goRight(2);
 //        try {
 //            Thread.sleep(11000);
@@ -249,7 +261,7 @@ public class Dobby {
 //        catch(InterruptedException e){
 //            Log.d("Spleepy time", "Sleep failed");
 //        }
-        driveTrain.goBackward(28);
+        driveTrain.goBackward(36);
 //        driveTrain.turn(90);
 //        this.straightLeft();
         baseMover.lowerMotors();

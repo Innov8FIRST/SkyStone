@@ -136,7 +136,7 @@ public class HardwareInnov8Dobby {
         baseServoLeft = hwMap.servo.get("baseServoLeft");
         baseServoLeft.setPosition(0.2);
         bHSupport = hwMap.servo.get("bHSupport");
-        bHSupport.setPosition(0.2);
+        bHSupport.setPosition(0.05);
         bHSupportRight = hwMap.servo.get("bHSupportRight");
         bHSupportRight.setPosition(1);
         try {
