@@ -8,6 +8,7 @@ public class StraightRight_Dobby extends LinearOpMode
 {
     @Override
     public void runOpMode() throws InterruptedException {
+
         Dobby dobby = new Dobby(telemetry, hardwareMap, this);
         waitForStart();
         dobby.straightRight();

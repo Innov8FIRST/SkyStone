@@ -35,35 +35,11 @@ public class BaseMover {
     public void raiseMotors() {
         Log.d(BASE_MOVER_CAPTION,"Motors have been raised");
         this.telemetry.update();
-        if  (this.opMode.opModeIsActive()) {
-            this.robot.bHSupport.setPosition((0.0));
-            this.robot.bHSupportRight.setPosition(1);
-            try {
-                Thread.sleep(500);
-            }
-            catch(InterruptedException e){
-                Log.d("Spleepy time", "Sleep failed");
-            }
             this.robot.baseServoLeft.setPosition(0.2);
             this.robot.baseServoRight.setPosition(0.1);
-
-        }
-
     }
 
     public void lowerMotors() {
-        if  (this.opMode.opModeIsActive()) {
-            this.robot.baseServoLeft.setPosition(motorsDown);
-            this.robot.baseServoRight.setPosition(0.9);
-            try {
-                Thread.sleep(500);
-            }
-            catch(InterruptedException e){
-                Log.d("Spleepy time", "Sleep failed");
-            }
-            this.robot.bHSupport.setPosition(.5);
-            this.robot.bHSupportRight.setPosition(0.1);
-        }
         Log.d(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.addData(BASE_MOVER_CAPTION,"Motors have been lowered");
         this.telemetry.update();
@@ -73,7 +49,6 @@ public class BaseMover {
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2){
         this.telemetry.addData(BASE_MOVER_CAPTION, "gamepad updated");
         this.telemetry.addData("Is moving up?", isGoingUp);
-        this.telemetry.addData("base support pos", this.robot.bHSupport.getPosition());
         this.telemetry.addData("base holder pos", this.robot.baseServoLeft.getPosition());
         this.telemetry.update();
 

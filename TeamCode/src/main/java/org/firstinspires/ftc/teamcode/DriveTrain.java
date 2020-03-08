@@ -157,10 +157,11 @@ public class DriveTrain {
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         if (degreesToTurn < 0) {
             while ((angles.firstAngle > degreesToTurn) && this.opMode.opModeIsActive()) {
-                this.robot.motorOne.setPower(wheelOnePower);
-                this.robot.motorTwo.setPower(wheelTwoPower);
-                this.robot.motorThree.setPower(-wheelThreePower);
-                this.robot.motorFour.setPower(-wheelFourPower);
+                double generalPower = (degreesToTurn - angles.firstAngle)/degreesToTurn;
+                this.robot.motorOne.setPower(generalPower * wheelOnePower);
+                this.robot.motorTwo.setPower(generalPower * wheelTwoPower);
+                this.robot.motorThree.setPower(-generalPower * wheelThreePower);
+                this.robot.motorFour.setPower(-generalPower * wheelFourPower);
                 angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 telemetry.addData("angles", angles.firstAngle);
                 telemetry.addData("degreesToTurn", degreesToTurn);
@@ -169,10 +170,11 @@ public class DriveTrain {
             }
         } else {
             while ((angles.firstAngle < degreesToTurn) && this.opMode.opModeIsActive()) {
-                this.robot.motorOne.setPower(-wheelOnePower);
-                this.robot.motorTwo.setPower(-wheelTwoPower);
-                this.robot.motorThree.setPower(wheelThreePower);
-                this.robot.motorFour.setPower(wheelFourPower);
+                double generalPower = (degreesToTurn - angles.firstAngle)/degreesToTurn;
+                this.robot.motorOne.setPower(-generalPower * wheelOnePower);
+                this.robot.motorTwo.setPower(-generalPower * wheelTwoPower);
+                this.robot.motorThree.setPower(generalPower * wheelThreePower);
+                this.robot.motorFour.setPower(generalPower * wheelFourPower);
                 angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                 telemetry.addData("angles", angles.firstAngle);
                 telemetry.addData("degreesToTurn", degreesToTurn);
@@ -239,6 +241,7 @@ public class DriveTrain {
         this.telemetry.update();
     }*/
     public void teleopUpdate(Gamepad gamepad1, Gamepad gamepad2) {
+        angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         Log.d(DRIVE_TRAIN_CAPTION, "turning teleop updated");
         this.telemetry.addData(DRIVE_TRAIN_CAPTION, "gamepad updated");
         telemetry.addData("1_left_stick_x", gamepad1.left_stick_x);

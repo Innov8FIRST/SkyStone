@@ -135,41 +135,16 @@ public class Dobby {
     }
 
     public void autoSimple() {
-
         driveTrain.goForward(12); // assuming robot is 18" long
     }
     public void straightRight(){
         driveTrain.goForward(15);
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
-        driveTrain.turn(-60);
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
+        driveTrain.turn(-90);
         driveTrain.goForward((30));
     }
     public void straightLeft(){
         driveTrain.goForward(15);
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
-        driveTrain.turn(68);
-        try {
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e){
-            Log.d("Spleepy time", "Sleep failed");
-        }
+        driveTrain.turn(90);
         driveTrain.goForward((30));
     }
 

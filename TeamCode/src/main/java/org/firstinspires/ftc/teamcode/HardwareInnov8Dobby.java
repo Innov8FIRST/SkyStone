@@ -41,9 +41,7 @@ public class HardwareInnov8Dobby {
 
     //    public Servo    handServo      = null;
     public Servo baseServoLeft = null;   // actually the right
-    public Servo bHSupport = null;
     public Servo baseServoRight = null;
-    public Servo bHSupportRight = null;
     public Servo ginny = null;
     public CRServo rapServoLeft = null;
     public CRServo rapServoRight = null;
@@ -112,8 +110,7 @@ public class HardwareInnov8Dobby {
         parameters.loggingEnabled = true;
         parameters.loggingTag = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-        imu = this.hwMap.get(BNO055IMU.class, "imu");
-
+       
         // Set all motors to zero power
         motorOne.setPower(0);
         motorTwo.setPower(0);
@@ -143,10 +140,6 @@ public class HardwareInnov8Dobby {
         //handServo.setPosition(END_SERVO);
         baseServoLeft = hwMap.servo.get("baseServoLeft");
         baseServoLeft.setPosition(0.2);
-        bHSupport = hwMap.servo.get("bHSupport");
-        bHSupport.setPosition(0.05);
-        bHSupportRight = hwMap.servo.get("bHSupportRight");
-        bHSupportRight.setPosition(1);
         try {
             Thread.sleep(500);
         }
