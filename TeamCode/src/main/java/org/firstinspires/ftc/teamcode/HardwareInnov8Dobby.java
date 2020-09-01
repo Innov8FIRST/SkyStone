@@ -110,7 +110,7 @@ public class HardwareInnov8Dobby {
         parameters.loggingEnabled = true;
         parameters.loggingTag = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-       
+
         // Set all motors to zero power
         motorOne.setPower(0);
         motorTwo.setPower(0);
