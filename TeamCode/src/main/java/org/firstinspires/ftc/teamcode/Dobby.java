@@ -8,8 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import static java.lang.Thread.sleep;
-
 public class Dobby {
     Telemetry telemetry;
     String DOBBY_CAPTION = "Dobby Status";
