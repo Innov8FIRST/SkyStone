@@ -156,6 +156,7 @@ public class DriveTrain {
         this.robot.imu.initialize(parameters);
         angles = this.robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
         if (degreesToTurn < 0) {
+            //add IMU stuff
             while ((angles.firstAngle > degreesToTurn) && this.opMode.opModeIsActive()) {
                 double generalPower = (degreesToTurn - angles.firstAngle)/degreesToTurn;
                 this.robot.motorOne.setPower(generalPower * wheelOnePower);
