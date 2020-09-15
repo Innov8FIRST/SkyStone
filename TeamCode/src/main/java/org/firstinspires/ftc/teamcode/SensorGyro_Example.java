@@ -10,6 +10,8 @@ your angle check in the loop, angle should never be null.
 
 */
 
+import android.util.Log;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -94,8 +96,11 @@ public class SensorGyro_Example extends LinearOpMode {
     while (opModeIsActive()) {
       angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
       telemetry.addData("first", angles.firstAngle);
+      Log.d("first angle: ", "" + angles.firstAngle);
       telemetry.addData("second", angles.secondAngle);
+      Log.d("second angle: ", "" + angles.secondAngle);
       telemetry.addData("third", angles.thirdAngle);
+      Log.d("third angle: ", "" + angles.thirdAngle);
       telemetry.addData("counter", counter);
       telemetry.update();
       if(angles.firstAngle > 45){
