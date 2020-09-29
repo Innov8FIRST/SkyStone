@@ -21,10 +21,9 @@ public class IMUExample_Dobby extends LinearOpMode
     BNO055IMU imu;
     Orientation angles;
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-    Telemetry telemetry;
-
     @Override
     public void runOpMode() throws InterruptedException {
+        this.imu = this.hardwareMap.get(BNO055IMU.class, "imu");
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
