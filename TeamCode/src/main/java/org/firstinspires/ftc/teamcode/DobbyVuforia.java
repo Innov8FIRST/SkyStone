@@ -78,7 +78,7 @@ public class DobbyVuforia {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            "AWJ+EQf/////AAABmSGBxxT0pE9zj/8iKqoUw7UTLM8w298rokFy7oa/PasYgOLDMgpGpcoTPy8zQIO07HaF3sC4s3OUfkSk5om1glukJ1hAajX9o/ip2UkQLZMe5b3GfA02yjezvLbMxygcp54OEq9fEeoYGqf9txbNG1Wkkf4sy3sHEkTSeLRLfQTQHsToXkZRvhp4GfvMOVumLsH7Qv3u/bLaHfx6agKw6SeXKRtk1QikjubHKFO5cuBX+cKSj6wkm+0XRuXuHhK6EUf4yvHkFsf7mis+/il6qcjiYE/MIJZb2NYY5HPyuxJPDAnFCYy1Ojj0SR6QNH7CG/Mfb+NRDEn3m2hpqP/BJ/81hET5GBVSoGXuxjkqali1";
+            "AS2kqar/////AAABmd66lNz2m0ULkv5i3Ayl/fUKx9br1CboLtmM/RDkD6W4k5exJup1//x99DiyVy9Cc8BSMX8j7GcWJb32OcySZOQUPSnMGvpafYI62BIMIN5HdHF9ekBINCjypzSxR92CLcYdxHRR6rk0ZfI9OJV6n+UaxaOsM4mK96yTt5wnXHOfIs6srzeMAAEMlz2Z4NJeKJ7VFmPRBkjRXIdwXmTOUdNFeKvua1kvjxz6sX6Er10doBqI7MdpsnwCJirnVUFw+xmgQ2rjQsS/0Hi+PHd60ZeBo9xrn6TmoC5DBXSHk1JgtyTv9rawnLmgMAOJcScb9uvCg1uw2wI//o9euRdaDF6QXnMaaEaF/WMVUXd0XZNl";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
